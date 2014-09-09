@@ -1,0 +1,10 @@
+C:\Projetos\PSI_Consultas\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\Domain.dll.config
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\Domain.dll
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\Domain.pdb
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\EntityFramework.dll
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\EntityFramework.xml
+C:\Projetos\PSI_Consultas\Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projetos\PSI_Consultas\Domain\obj\Debug\Domain.dll
+C:\Projetos\PSI_Consultas\Domain\obj\Debug\Domain.pdb

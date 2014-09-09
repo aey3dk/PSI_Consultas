@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de paciente</title>
+</head>
+<body>
+    <div>
+        @model WebApp.Models.PacienteModel
+
+        @using (Html.BeginForm("CadastrarPaciente", "Paciente", FormMethod.Post))
+        {
+            @Html.LabelFor(p => p.Codigo) <br />
+            @Html.TextBoxFor(p => p.Codigo, new { @required = "false"})<br /><br />
+
+            @Html.LabelFor(p => p.Descricao) <br />
+            @Html.TextBoxFor(p => p.Descricao, new { @maxLength = 60, @size = 60 })<br /><br />
+
+            @Html.LabelFor(p => p.DataNascimento) <br />
+            @Html.TextBoxFor(p => p.DataNascimento)<br /><br />
+
+            <input type="submit" name="0" value="Gravar" width="60" />
+            <input type="submit" name="1" value="Excluir" width="60" />
+
+            @Html.ValidationSummary()
+
+            @ViewBag.Mensagem
+        }
+    </div>
+</body>
+</html>
