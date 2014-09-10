@@ -8,6 +8,7 @@ namespace Domain.Enum
 {
     public enum TipoOperacaoEnum
     {
+        Buscar,
         Gravar,
         Excluir
     }

@@ -13,6 +13,7 @@ namespace Domain.Entity
         public Int32 Codigo { get; set; }
 
         [Column("PAC_DESCRICAO")]
+        [StringLength(60)]
         public String Descricao { get; set; }
 
         [Column("PAC_DATANASCIMENTO")]

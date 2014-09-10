@@ -14,13 +14,14 @@ namespace Domain.Repository
             {
                 using (Conexao con = new Conexao())
                 {
+                    con.Database.CreateIfNotExists();
                     con.Paciente.Add(p);
                     con.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao salvar paciente" + e.Message + " - " + e.InnerException ?? e.InnerException.Message);
+                throw new Exception("Erro ao salvar paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
         public void Remover(Paciente p)
@@ -35,7 +36,7 @@ namespace Domain.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao remover paciente" + e.Message + " - " + e.InnerException ?? e.InnerException.Message);
+                throw new Exception("Erro ao remover paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
 
@@ -50,7 +51,22 @@ namespace Domain.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao listar todos os pacientes" + e.Message);
+                throw new Exception("Erro ao listar todos os pacientes: " + e.Message);
+            }
+        }
+
+        public Paciente ObterPeloCodigo(Int32 codigo)
+        {
+            try
+            {
+                using (Conexao con = new Conexao())
+                {
+                    return con.Paciente.Find(codigo);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao obter paciente: " + e.Message);
             }
         }
     }
