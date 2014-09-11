@@ -14,141 +14,54 @@
     </style>
 </head>
 <body>
-    <div>
-        <!-- Fixed navbar -->
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/Default/Index">PSI Consultas</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paciente<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/Paciente/Cadastro" target="iframeTeste">Cadastrar</a></li>
-                                <li><a href="/Paciente/Cadastro" target="right_side">teste</a></li>
-                                @*<li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>*@
-                            </ul>
-                        </li>
-                        @*<li class="active"><a href="#">Home</a></li>*@
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../navbar/">Default</a></li>
-                        <li><a href="../navbar-static-top/">Static top</a></li>
-                        @*<li class="active"><a href="./">Fixed top</a></li>*@
-                        <li><a href="#contact">Contatos</a></li>
-                        <li><a href="#about">Sobre</a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
+    <div class="well container" id="teste">
+        @Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })
+        <br /><br />
 
-        <div class="well container" id="teste">
+        @model WebApp.Models.PacienteModel
 
-            <br /><br />
-
-            @Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })
-            <br /><br />
-
-            @model WebApp.Models.PacienteModel
-
-            @using (Html.BeginForm("CadastrarPaciente", "Paciente", FormMethod.Post))
-            {
-                <div class="form-group">
-                    @Html.LabelFor(p => p.Codigo)
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                @Html.TextBoxFor(p => p.Codigo, new { @required = "false", @class = "form-control", @id = "txtCodigo", @type = "number" })
-                                <span class="input-group-btn">
-                                    <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
-                                </span>
-                            </div>
+        @using (Html.BeginForm("CadastrarPaciente", "Paciente", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(p => p.Codigo)
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            @Html.TextBoxFor(p => p.Codigo, new { @required = "false", @class = "form-control", @id = "txtCodigo", @type = "number" })
+                            <span class="input-group-btn">
+                                <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
+                            </span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(p => p.Descricao)
-                    @Html.TextBoxFor(p => p.Descricao, new { @maxLength = 60, @size = 60, @class = "form-control" })
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(p => p.DataNascimento)
-                    @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control" })
-                </div>
-
-                <div class="form-group">
-                    <label>Documento</label>
-                    <input type="submit" name="Command" value="Buscar documento" width="60" class="btn btn-success" />
-                    <iframe name="right_side" src="" width="100%" height="100%"></iframe>
-                    @*<iframe name="right_side" src="" width="100%" height="100%"></iframe>*@
-                </div>
-
-                <input type="submit" name="Command" value="Gravar" width="60" class="btn btn-primary" data-loading-text="Loading..." />
-
-                <input type="submit" name="Command" value="Excluir" width="60" class="btn btn-danger" />
-
-                <div style="color: red">
-                    @Html.ValidationSummary()
-                </div>
-
-                @ViewBag.Mensagem
-            }
-        </div> <!-- /container -->
-        <!-- janela de dialogo -->
-        <div id="janela" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4>Formulário de Cadastro de Clientes</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            Nome do Cliente: <br />
-                            <input type="text" id="nome" placeholder="Digite seu Nome" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            Endereço de Email: <br />
-                            <input type="email" id="email" placeholder="Digite seu Email" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            Data de Nascimento: <br />
-                            <input type="date" id="datanasc" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="cep" placeholder="Informe o CEP" class="form-control" style="width: 200px; display: inline;" />
-                            <button id="btnendereco" class="btn btn-primary">
-                                Obter Endereço
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="endereco" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btncadastro" class="btn btn-success">
-                            Cadastrar Cliente
-                        </button>
-                        <button class="btn btn-danger" data-dismiss="modal">
-                            Fechar Formulário
-                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(p => p.Descricao)
+                @Html.TextBoxFor(p => p.Descricao, new { @maxLength = 60, @size = 60, @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(p => p.DataNascimento)
+                @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Documento</label>
+                <input type="submit" name="Command" value="Buscar documento" width="60" class="btn btn-success" />
+                <iframe name="right_side" src="" width="100%" height="100%"></iframe>
+            </div>
+
+            <input type="submit" name="Command" value="Gravar" width="60" class="btn btn-primary" data-loading-text="Loading..." />
+
+            <input type="submit" name="Command" value="Excluir" width="60" class="btn btn-danger" />
+
+            <div style="color: red">
+                @Html.ValidationSummary()
+            </div>
+
+            @ViewBag.Mensagem
+        }
     </div>
 </body>
 </html>
