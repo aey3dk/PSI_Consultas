@@ -19,6 +19,10 @@ namespace WebApp.Controllers
         {
             return View();
         }
+        public ActionResult teste()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult CadastrarPaciente(PacienteModel model, String command)
