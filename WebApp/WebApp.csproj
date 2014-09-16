@@ -169,7 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\PSI.pubxml" />
-    <Content Include="Views\Paciente\teste.cshtml" />
+    <Content Include="Views\Paciente\Documento.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

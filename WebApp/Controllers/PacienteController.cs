@@ -19,7 +19,7 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        public ActionResult teste()
+        public ActionResult Documento()
         {
             return View();
         }
