@@ -30,7 +30,7 @@
             <div class="form-group col-md-3">
                 @Html.LabelFor(p => p.Codigo)
                 <div class="input-group">
-                    @Html.TextBoxFor(p => p.Codigo, new { @required = "false", @class = "form-control", @type = "number", @maxLength = 15 })
+                    @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
                     <span class="input-group-btn">
                         <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
                     </span>

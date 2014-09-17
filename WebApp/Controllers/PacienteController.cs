@@ -14,19 +14,13 @@ namespace WebApp.Controllers
 
         public ActionResult Cadastro()
         {
-            return View();
-        }
-        public ActionResult Documento()
-        {
-            return View();
+            return View(new PacienteModel());
         }
 
         [HttpPost]
         public ActionResult Cadastrar(PacienteModel model, String command)
         {
             CarregarTipoOperacao(command);
-
-            var entity = new Paciente();
 
             if (TipoOperacao == TipoOperacaoEnum.Buscar)
             {
@@ -46,8 +40,8 @@ namespace WebApp.Controllers
 
         private void CarregarTipoOperacao(String command)
         {
-            if (command == TipoOperacaoEnum.Buscar.ToString()) { TipoOperacao = TipoOperacaoEnum.Buscar; }
-            else if (command == TipoOperacaoEnum.Gravar.ToString()) { TipoOperacao = TipoOperacaoEnum.Gravar; }
+                 if (command == TipoOperacaoEnum.Buscar.ToString())  { TipoOperacao = TipoOperacaoEnum.Buscar; }
+            else if (command == TipoOperacaoEnum.Gravar.ToString())  { TipoOperacao = TipoOperacaoEnum.Gravar; }
             else if (command == TipoOperacaoEnum.Excluir.ToString()) { TipoOperacao = TipoOperacaoEnum.Excluir; }
         }
 
@@ -67,13 +61,13 @@ namespace WebApp.Controllers
                     if (TipoOperacao == TipoOperacaoEnum.Gravar)
                     {
                         new PacienteRepository().Salvar(p);
+                        ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
                     }
                     else if (TipoOperacao == TipoOperacaoEnum.Excluir)
                     {
                         new PacienteRepository().Remover(p);
                     }
 
-                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", model.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
                 }
             }
             catch (Exception ex)
@@ -84,7 +78,7 @@ namespace WebApp.Controllers
 
         public ActionResult Limpar()
         {
-            return View("Cadastro");
+            return View("Cadastro", new PacienteModel());
         }
 
         private PacienteModel Buscar(Int64 codigo)
