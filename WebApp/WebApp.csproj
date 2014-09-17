@@ -111,11 +111,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\TesteLightBaseController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\PacienteModel.cs" />
+    <Compile Include="Models\TesteLightBaseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +125,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\js\jquery.maskedinput.js" />
     <Content Include="Resources\PSI.ico" />
     <Content Include="Resources\css\bootstrap-theme.css" />
     <Content Include="Resources\css\bootstrap-theme.min.css" />
@@ -136,6 +139,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Default\Home.aspx" />
+    <Content Include="Views\TesteLightBase\Documento.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -169,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\PSI.pubxml" />
-    <Content Include="Views\Paciente\Documento.cshtml" />
+    <Content Include="Views\TesteLightBase\Cadastro.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

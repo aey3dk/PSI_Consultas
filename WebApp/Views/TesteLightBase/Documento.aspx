@@ -1,4 +1,8 @@
-﻿<html>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+
+<!DOCTYPE html>
+
+<html>
 <head>
     <title></title>
     <script src="~/Resources/js/jquery-1.11.1.js"></script>

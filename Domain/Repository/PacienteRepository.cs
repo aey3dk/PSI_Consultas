@@ -8,6 +8,17 @@ namespace Domain.Repository
 {
     public class PacienteRepository
     {
+        public PacienteRepository()
+        {
+            using (Conexao con = new Conexao())
+            {
+                if (con.Database.Exists())
+                {
+                    con.Database.Delete();
+                }
+            }
+        }
+
         public void Salvar(Paciente p)
         {
             try
@@ -55,7 +66,7 @@ namespace Domain.Repository
             }
         }
 
-        public Paciente ObterPeloCodigo(Int32 codigo)
+        public Paciente ObterPeloCodigo(Int64 codigo)
         {
             try
             {

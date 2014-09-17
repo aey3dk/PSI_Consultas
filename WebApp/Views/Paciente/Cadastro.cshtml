@@ -3,65 +3,98 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Cadastro de paciente</title>
+    <title></title>
     <link href="~/Resources/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Resources/js/jquery-1.11.1.js"></script>
     <script src="~/Resources/js/bootstrap.js"></script>
-    <style type="text/css">
-        body {
-            padding-top: 70px;
-        }
-    </style>
+    <script src="~/Resources/js/jquery.maskedinput.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#CPF").mask("999.999.999-99");
+            //$("#Codigo").mask("999999999999999");
+        });
+    </script>
 </head>
 <body>
-    <div class="well container" id="teste">
-        @Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })
-        <br /><br />
+    <div class="pager" style="margin: 0px;">
+        <h4>Cadastro de Paciente</h4>
+    </div>
+    @Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })
+    <br /><br />
 
-        @model WebApp.Models.PacienteModel
+    @model WebApp.Models.PacienteModel
 
-        @using (Html.BeginForm("CadastrarPaciente", "Paciente", FormMethod.Post))
-        {
-            <div class="form-group">
+    @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="form-group col-md-3">
                 @Html.LabelFor(p => p.Codigo)
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            @Html.TextBoxFor(p => p.Codigo, new { @required = "false", @class = "form-control", @id = "txtCodigo", @type = "number" })
-                            <span class="input-group-btn">
-                                <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
-                            </span>
-                        </div>
-                    </div>
+                <div class="input-group">
+                    @Html.TextBoxFor(p => p.Codigo, new { @required = "false", @class = "form-control", @type = "number", @maxLength = 15 })
+                    <span class="input-group-btn">
+                        <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
+                    </span>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(p => p.Descricao)
-                @Html.TextBoxFor(p => p.Descricao, new { @maxLength = 60, @size = 60, @class = "form-control" })
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(p => p.Nome)
+                @Html.TextBoxFor(p => p.Nome, new { @class = "form-control", @maxLength = 60 })
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group" style="margin: 0 30px 15px 0;">
+                @Html.LabelFor(p => p.DataNascimento) <br />
+                @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control", @type = "date" })
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(p => p.DataNascimento)
-                @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control" })
+            <div class="form-group" style="margin-bottom: 15px;">
+                @Html.LabelFor(p => p.CPF) <br />
+                @Html.TextBoxFor(p => p.CPF, new { @class = "form-control" })
             </div>
+        </div>
 
-            <div class="form-group">
-                <label>Documento</label>
-                <input type="submit" name="Command" value="Buscar documento" width="60" class="btn btn-success" />
-                <iframe src="/Paciente/Documento" width="99%" height="1000"></iframe>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(p => p.Email)
+                @Html.TextBoxFor(p => p.Email, new { @type = "email", @class = "form-control", @maxLength = 60 })
             </div>
+        </div>
 
-            <input type="submit" name="Command" value="Gravar" width="60" class="btn btn-primary" data-loading-text="Loading..." />
-
-            <input type="submit" name="Command" value="Excluir" width="60" class="btn btn-danger" />
-
-            <div style="color: red">
-                @Html.ValidationSummary()
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="pager" style="margin: 0px;">
+                    <input type="submit" name="Command" value="Gravar" class="btn btn-primary" style="width: 100px;" />
+                    <input type="submit" name="Command" value="Excluir" class="btn btn-danger" style="width: 100px;" />
+                </div>
             </div>
+        </div>
 
-            @ViewBag.Mensagem
+        <p>
+            @Html.ValidationSummary()
+        </p>
+
+        String mensagem = ViewBag.Mensagem;
+
+        if (mensagem != null)
+        {
+            if (!mensagem.Contains("Erro"))
+            {
+                <div class="alert alert-info">
+                    @ViewBag.Mensagem
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Mensagem
+                </div>
+            }
         }
-    </div>
+    }
 </body>
 </html>

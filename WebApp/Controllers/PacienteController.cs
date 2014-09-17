@@ -2,9 +2,6 @@
 using Domain.Enum;
 using Domain.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApp.Models;
 
@@ -25,7 +22,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult CadastrarPaciente(PacienteModel model, String command)
+        public ActionResult Cadastrar(PacienteModel model, String command)
         {
             CarregarTipoOperacao(command);
 
@@ -49,8 +46,8 @@ namespace WebApp.Controllers
 
         private void CarregarTipoOperacao(String command)
         {
-                 if (command == TipoOperacaoEnum.Buscar.ToString())  { TipoOperacao = TipoOperacaoEnum.Buscar; }
-            else if (command == TipoOperacaoEnum.Gravar.ToString())  { TipoOperacao = TipoOperacaoEnum.Gravar; }
+            if (command == TipoOperacaoEnum.Buscar.ToString()) { TipoOperacao = TipoOperacaoEnum.Buscar; }
+            else if (command == TipoOperacaoEnum.Gravar.ToString()) { TipoOperacao = TipoOperacaoEnum.Gravar; }
             else if (command == TipoOperacaoEnum.Excluir.ToString()) { TipoOperacao = TipoOperacaoEnum.Excluir; }
         }
 
@@ -63,7 +60,7 @@ namespace WebApp.Controllers
                     Paciente p = new Paciente
                     {
                         Codigo = entidadeExiste ? 0 : model.Codigo,
-                        Descricao = model.Descricao,
+                        Nome = model.Nome,
                         DataNascimento = model.DataNascimento
                     };
 
@@ -76,7 +73,7 @@ namespace WebApp.Controllers
                         new PacienteRepository().Remover(p);
                     }
 
-                    ViewBag.Mensagem = "Paciente " + (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído") + " com sucesso";
+                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", model.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
                 }
             }
             catch (Exception ex)
@@ -90,16 +87,23 @@ namespace WebApp.Controllers
             return View("Cadastro");
         }
 
-        private PacienteModel Buscar(Int32 codigo)
+        private PacienteModel Buscar(Int64 codigo)
         {
+            var model = new PacienteModel();
             var entity = new PacienteRepository().ObterPeloCodigo(codigo);
-            entidadeExiste = entity != null;
-            var model = new PacienteModel()
+
+            if (entity != null)
             {
-                Codigo = codigo,
-                Descricao = entity.Descricao,
-                DataNascimento = entity.DataNascimento
-            };
+                entidadeExiste = true;
+                model = new PacienteModel()
+                {
+                    Codigo = codigo,
+                    Nome = entity.Nome,
+                    DataNascimento = entity.DataNascimento,
+                    CPF = entity.CPF,
+                    Email = entity.Email
+                };
+            }
             return model;
         }
     }
