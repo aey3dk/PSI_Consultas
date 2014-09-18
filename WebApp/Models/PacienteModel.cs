@@ -6,6 +6,8 @@ namespace WebApp.Models
     public class PacienteModel
     {
         [Display(Name = "Código")]
+        [Required(ErrorMessage = "O campo código é obrigatório")]
+        [Range(1, 999999999999999, ErrorMessage = "O campo código deve possuir no máximo 15 dígitos")]
         public Int64 Codigo { get; set; }
 
         [Display(Name = "Nome completo")]

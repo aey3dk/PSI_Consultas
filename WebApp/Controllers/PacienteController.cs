@@ -14,7 +14,7 @@ namespace WebApp.Controllers
 
         public ActionResult Cadastro()
         {
-            return View(new PacienteModel());
+            return View();
         }
 
         [HttpPost]
@@ -61,13 +61,14 @@ namespace WebApp.Controllers
                     if (TipoOperacao == TipoOperacaoEnum.Gravar)
                     {
                         new PacienteRepository().Salvar(p);
-                        ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
                     }
                     else if (TipoOperacao == TipoOperacaoEnum.Excluir)
                     {
                         new PacienteRepository().Remover(p);
                     }
 
+                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", model.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
+                    Limpar();
                 }
             }
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace WebApp.Controllers
 
         public ActionResult Limpar()
         {
-            return View("Cadastro", new PacienteModel());
+            return View("Cadastro");
         }
 
         private PacienteModel Buscar(Int64 codigo)
