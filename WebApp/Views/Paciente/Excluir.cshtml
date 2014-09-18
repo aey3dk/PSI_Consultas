@@ -1,0 +1,47 @@
+﻿@model WebApp.Models.PacienteModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Resources/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Resources/js/jquery-1.11.1.js"></script>
+    <script src="~/Resources/js/bootstrap.js"></script>
+    <script src="~/Resources/js/jquery.maskedinput.js"></script>
+    <style type="text/css">
+        .btnDefault {
+            width: 85px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="well">
+        <h3>Deseja realmente excluir o este registro?</h3>
+        <fieldset>
+            <legend>Paciente</legend>
+
+            <div class="display-label">
+                @Html.LabelFor(model => model.Codigo):
+                @Html.DisplayNameFor(model => model.Codigo)
+            </div>
+            <div class="display-field">
+                @Html.LabelFor(model => model.Nome):
+                @Html.DisplayFor(model => model.Nome)
+            </div>
+        </fieldset>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                <input type="submit" value="Excluir" class="btn btn-danger btnDefault" /> |
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btnDefault" })
+            </p>
+        }
+    </div>
+</body>
+</html>
+

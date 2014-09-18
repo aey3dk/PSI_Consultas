@@ -12,10 +12,7 @@ namespace Domain.Repository
         {
             using (Conexao con = new Conexao())
             {
-                if (con.Database.Exists())
-                {
-                    con.Database.Delete();
-                }
+                con.Database.CreateIfNotExists();
             }
         }
 
@@ -25,7 +22,6 @@ namespace Domain.Repository
             {
                 using (Conexao con = new Conexao())
                 {
-                    con.Database.CreateIfNotExists();
                     con.Paciente.Add(p);
                     con.SaveChanges();
                 }
@@ -35,6 +31,23 @@ namespace Domain.Repository
                 throw new Exception("Erro ao salvar paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
+
+        public void Editar(Paciente p)
+        {
+            try
+            {
+                using (Conexao con = new Conexao())
+                {
+                    con.Entry(p).State = System.Data.Entity.EntityState.Modified;
+                    con.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao salvar paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
+            }
+        }
+
         public void Remover(Paciente p)
         {
             try

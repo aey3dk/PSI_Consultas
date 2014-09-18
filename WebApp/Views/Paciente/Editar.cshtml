@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model WebApp.Models.PacienteModel
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -8,33 +10,21 @@
     <script src="~/Resources/js/jquery-1.11.1.js"></script>
     <script src="~/Resources/js/bootstrap.js"></script>
     <script src="~/Resources/js/jquery.maskedinput.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#CPF").mask("999.999.999-99");
-            //$("#Codigo").mask("999999999999999");
-        });
-    </script>
 </head>
 <body>
     <div class="pager" style="margin: 0px;">
-        <h4>Cadastro de Paciente</h4>
+        <h4>Editar Paciente</h4>
     </div>
-    @Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })
-    <br /><br />
-
-    @model WebApp.Models.PacienteModel
-
+    
     @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
     {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-6">
                 @Html.LabelFor(p => p.Codigo)
-                <div class="input-group">
-                    @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
-                    <span class="input-group-btn">
-                        <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
-                    </span>
-                </div>
+                @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
             </div>
         </div>
 
@@ -68,33 +58,11 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="pager" style="margin: 0px;">
-                    <input type="submit" name="Command" value="Gravar" class="btn btn-primary" style="width: 100px;" />
-                    <input type="submit" name="Command" value="Excluir" class="btn btn-danger" style="width: 100px;" />
+                    <input type="submit" name="Command" value="Editar" class="btn btn-primary" style="width: 100px;" /> |
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
                 </div>
             </div>
         </div>
-
-        <p style="color: red;">
-            @Html.ValidationSummary()
-        </p>
-
-        String mensagem = ViewBag.Mensagem;
-
-        if (mensagem != null)
-        {
-            if (!mensagem.Contains("Erro"))
-            {
-                <div class="alert alert-info">
-                    @ViewBag.Mensagem
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger">
-                    @ViewBag.Mensagem
-                </div>
-            }
-        }
     }
 </body>
 </html>

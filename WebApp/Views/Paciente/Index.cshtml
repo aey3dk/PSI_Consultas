@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebApp.Models.PacienteModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Resources/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Resources/js/jquery-1.11.1.js"></script>
+    <script src="~/Resources/js/bootstrap.js"></script>
+    <script src="~/Resources/js/jquery.maskedinput.js"></script>
+    <style type="text/css">
+        .btnDefault {
+            width: 85px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="well">
+        <p>
+            @Html.ActionLink("Criar Novo", "Cadastrar", null, new { @class = "btn btn-primary" })
+        </p>
+
+        <table class="table table-bordered">
+            <tr>
+                Pacientes
+            </tr>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhar", "Detalhar", new { codigo = item.Codigo }, new { @class = "btn btn-info btnDefault" }) | 
+                        @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }, new { @class = "btn btn-success btnDefault" }) | 
+                        @Html.ActionLink("Excluir", "Excluir", new { codigo = item.Codigo }, new { @class = "btn btn-danger btnDefault" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
