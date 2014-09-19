@@ -8,7 +8,7 @@ namespace Domain.Entity
     public class Paciente
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("PAC_CODIGO")]
         [Range(1, 999999999999999)]
         public Int64 Codigo { get; set; }

@@ -9,11 +9,17 @@ namespace Domain.Repository
 {
     public class PacienteRepository
     {
+        private Conexao Conexao;
         public PacienteRepository()
         {
-            using (Conexao con = new Conexao())
+            try
             {
-                con.Database.CreateIfNotExists();
+                Conexao = new Conexao();
+                Conexao.Database.CreateIfNotExists();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao se conectar com a base de dados: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
 
@@ -21,11 +27,8 @@ namespace Domain.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
-                {
-                    con.Paciente.Add(p);
-                    con.SaveChanges();
-                }
+                Conexao.Paciente.Add(p);
+                Conexao.SaveChanges();
             }
             catch (Exception e)
             {
@@ -37,11 +40,8 @@ namespace Domain.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
-                {
-                    con.Entry(p).State = EntityState.Modified;
-                    con.SaveChanges();
-                }
+                Conexao.Entry(p).State = EntityState.Modified;
+                Conexao.SaveChanges();
             }
             catch (Exception e)
             {
@@ -53,13 +53,10 @@ namespace Domain.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
-                {
-                    if (con.Entry(p).State == EntityState.Detached)
-                        con.Paciente.Attach(p);
-                    con.Paciente.Remove(p);
-                    con.SaveChanges();
-                }
+                if (Conexao.Entry(p).State == EntityState.Detached)
+                    Conexao.Paciente.Attach(p);
+                Conexao.Paciente.Remove(p);
+                Conexao.SaveChanges();
             }
             catch (Exception e)
             {
@@ -71,10 +68,7 @@ namespace Domain.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
-                {
-                    return con.Paciente.ToList();
-                }
+                return Conexao.Paciente.ToList();
             }
             catch (Exception e)
             {
@@ -86,15 +80,17 @@ namespace Domain.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
-                {
-                    return con.Paciente.Find(codigo);
-                }
+                return Conexao.Paciente.Find(codigo);
             }
             catch (Exception e)
             {
                 throw new Exception("Erro ao obter paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
+        }
+
+        private void Dispose()
+        {
+            Conexao.Dispose();
         }
     }
 }

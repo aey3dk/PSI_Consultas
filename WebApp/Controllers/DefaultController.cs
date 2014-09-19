@@ -30,5 +30,20 @@ namespace WebApp.Controllers
 
             return View("Index");
         }
+
+        public ActionResult PopularBaseDados()
+        {
+            try
+            {
+                new BaseRepository().PopularBaseDados();
+                ViewBag.Mensagem = "Base de dados populado com sucesso";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensagem = "Erro ao popular base de dados: " + ex.Message;
+            }
+
+            return View("Index");
+        }
     }
 }

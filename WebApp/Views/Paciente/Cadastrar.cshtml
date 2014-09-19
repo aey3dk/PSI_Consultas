@@ -18,117 +18,83 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#CPF").mask("999.999.999-99");
-
-            //$("#btnBuscar").click(function () {
-            //    var codigo = $("#Codigo").val();
-            //    $.ajax({
-            //        type: "GET",
-            //        url: "/Paciente/Buscar",
-            //        data: "codigo=" + codigo,
-            //        contentType: "application/json; charset=utf-8",
-            //        dataType: "json",
-            //        success: sucesso,
-            //        error: erro
-            //    });
-
-            //    function sucesso(retorno, status) {
-            //        alert(retorno);
-            //    }
-
-            //    function erro() {
-            //        alert("Erro na busca!");
-            //    }
-            //});
         });
     </script>
 </head>
 <body>
-    <div class="pager" style="margin: 0px;">
-        <h4>Cadastro de Paciente</h4>
-    </div>
-    @*@Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })*@
-    @*<br />*@<br />
+    <div class="well">
+        <div class="pager" style="margin: 0px;">
+            <h4>Cadastro de Paciente</h4>
+        </div>
+        <br />
 
-    @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
-    {
-        @*<div class="row">
-                <div class="form-group col-md-3">
+        @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="form-group col-md-6">
                     @Html.LabelFor(p => p.Codigo)
-                    <div class="input-group">
-                        @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
-                        <span class="input-group-btn">
-                            <button id="btnBuscar" class="btn btn-success">Buscar</button>
-                            <input type="submit" name="Command" value="Buscar" width="60" class="btn btn-success" />
-                            @Html.ActionLink("Buscar", "Buscar", "Paciente", new { @codigo = Model.Codigo }, new { @class = "btn btn-success" })
-                        </span>
+                    @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(p => p.Nome)
+                    @Html.TextBoxFor(p => p.Nome, new { @class = "form-control", @maxLength = 60 })
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group" style="margin: 0 30px 15px 0;">
+                    @Html.LabelFor(p => p.DataNascimento) <br />
+                    @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control", @type = "date" })
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    @Html.LabelFor(p => p.CPF) <br />
+                    @Html.TextBoxFor(p => p.CPF, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(p => p.Email)
+                    @Html.TextBoxFor(p => p.Email, new { @type = "email", @class = "form-control", @maxLength = 60 })
+                </div>
+            </div>
+
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pager" style="margin: 0px;">
+                        <input type="submit" value="Gravar" class="btn btn-primary btnDefault" /> |
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
                     </div>
                 </div>
-            </div>*@
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(p => p.Codigo)
-                @Html.TextBoxFor(p => p.Codigo, new { @class = "form-control", @type = "number", @maxLength = 15 })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(p => p.Nome)
-                @Html.TextBoxFor(p => p.Nome, new { @class = "form-control", @maxLength = 60 })
-            </div>
-        </div>
-
-        <div class="form-inline">
-            <div class="form-group" style="margin: 0 30px 15px 0;">
-                @Html.LabelFor(p => p.DataNascimento) <br />
-                @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control", @type = "date" })
             </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                @Html.LabelFor(p => p.CPF) <br />
-                @Html.TextBoxFor(p => p.CPF, new { @class = "form-control" })
+            <div style="color: red; ">
+                @Html.ValidationSummary()
             </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(p => p.Email)
-                @Html.TextBoxFor(p => p.Email, new { @type = "email", @class = "form-control", @maxLength = 60 })
-            </div>
-        </div>
+            String mensagem = ViewBag.Mensagem;
 
-        <br />
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="pager" style="margin: 0px;">
-                    <input type="submit" value="Gravar" class="btn btn-primary btnDefault" /> |
-                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
-                </div>
-            </div>
-        </div>
-
-        <div style="color: red; ">
-            @Html.ValidationSummary()
-        </div>
-
-        String mensagem = ViewBag.Mensagem;
-
-        if (mensagem != null)
-        {
-            if (!mensagem.Contains("Erro"))
+            if (mensagem != null)
             {
-                <div class="alert alert-info">
-                    @ViewBag.Mensagem
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger">
-                    @ViewBag.Mensagem
-                </div>
+                if (!mensagem.Contains("Erro"))
+                {
+                    <div class="alert alert-info">
+                        @ViewBag.Mensagem
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.Mensagem
+                    </div>
+                }
             }
         }
-    }
+    </div>
 </body>
 </html>

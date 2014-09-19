@@ -19,9 +19,13 @@
 
 <body>
     <div class="well">
+        <div class="pager" style="margin: 0px;">
+            <h4>Cadastro de Paciente</h4>
+        </div>
         <h4>Deseja realmente excluir o este registro?</h4>
-        <fieldset>
-            <legend>Paciente</legend>
+        <br />
+        @*<fieldset>
+            <legend>Paciente</legend>*@
 
             <div class="form-inline">
                 @Html.LabelFor(model => model.Codigo, new { @class = "control-label col-sm-3" }):
@@ -43,7 +47,7 @@
                 @Html.LabelFor(model => model.Email, new { @class = "control-label col-sm-3" }):
                 @Html.DisplayFor(model => model.Email)
             </div>
-        </fieldset>
+        @*</fieldset>*@
 
         @using (Html.BeginForm())
         {
