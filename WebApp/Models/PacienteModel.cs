@@ -15,9 +15,10 @@ namespace WebApp.Models
         [MaxLength(60, ErrorMessage = "O campo descrição deve possuir no máximo 60 dígitos")]
         public String Nome { get; set; }
 
+        //yyyy-MM-dd
         [Display(Name = "Data de nascimento")]
         [Required(ErrorMessage = "O campo data de nascimento é obrigatório")]
-        public DateTime DataNascimento { get; set; }
+        public String DataNascimento { get; set; }
 
         //123.456.789-00
         [Display(Name = "CPF")]

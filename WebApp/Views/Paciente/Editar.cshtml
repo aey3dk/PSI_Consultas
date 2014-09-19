@@ -16,10 +16,9 @@
         <h4>Editar Paciente</h4>
     </div>
     
-    @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
+    @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
         
         <div class="row">
             <div class="form-group col-md-6">

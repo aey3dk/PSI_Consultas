@@ -1,5 +1,4 @@
 ﻿using Domain.Entity;
-using Domain.Enum;
 using Domain.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,9 +9,6 @@ namespace WebApp.Controllers
 {
     public class PacienteController : Controller
     {
-        private TipoOperacaoEnum TipoOperacao;
-        private Boolean entidadeExiste;
-
         public ActionResult Index()
         {
             var lista = new List<PacienteModel>();
@@ -22,120 +18,54 @@ namespace WebApp.Controllers
                 {
                     Codigo = item.Codigo,
                     Nome = item.Nome,
-                    DataNascimento = item.DataNascimento,
+                    DataNascimento = item.DataNascimento.ToString("yyy-MM-dd"),
                     CPF = item.CPF,
                     Email = item.Email
                 });
             }
             return View(lista);
         }
-        //public ActionResult Cadastro()
-        //{
-        //    return View(new PacienteModel());
-        //}
 
-        //public ActionResult Cadastrar(PacienteModel model, String command)
-        //{
-        //    CarregarTipoOperacao(command);
+        //
+        // GET: /Paciente/Cadastrar
+        public ActionResult Cadastrar()
+        {
+            return View();
+        }
 
-        //    if (TipoOperacao == TipoOperacaoEnum.Buscar)
-        //    {
-        //        //model = Buscar(model.Codigo);
-        //    }
-        //    else if (TipoOperacao == TipoOperacaoEnum.Gravar)
-        //    {
-        //        ProcessarOperacao(model, TipoOperacao);
-        //    }
-        //    else if (TipoOperacao == TipoOperacaoEnum.Excluir)
-        //    {
-        //        ProcessarOperacao(model, TipoOperacao);
-        //    }
+        //
+        // POST: /Paciente/Cadastrar
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Cadastrar(PacienteModel model)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    db.PacienteModels.Add(PacienteModel);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
-        //    return View("Cadastro", model);
-        //}
+            //return View(PacienteModel);
 
-        //private void CarregarTipoOperacao(String command)
-        //{
-        //    if (command == TipoOperacaoEnum.Buscar.ToString()) { TipoOperacao = TipoOperacaoEnum.Buscar; }
-        //    else if (command == TipoOperacaoEnum.Gravar.ToString()) { TipoOperacao = TipoOperacaoEnum.Gravar; }
-        //    else if (command == TipoOperacaoEnum.Excluir.ToString()) { TipoOperacao = TipoOperacaoEnum.Excluir; }
-        //}
+            if (ModelState.IsValid)
+            {
+                Paciente p = new Paciente
+                {
+                    Codigo = model.Codigo,
+                    Nome = model.Nome,
+                    DataNascimento = Convert.ToDateTime(model.DataNascimento),
+                    CPF = model.CPF,
+                    Email = model.Email
+                };
 
-        //private void ProcessarOperacao(PacienteModel model, TipoOperacaoEnum TipoOperacao)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            Paciente p = new Paciente
-        //            {
-        //                Codigo = entidadeExiste ? 0 : model.Codigo,
-        //                Nome = model.Nome,
-        //                DataNascimento = model.DataNascimento
-        //            };
+                new PacienteRepository().Salvar(p);
 
-        //            if (TipoOperacao == TipoOperacaoEnum.Gravar)
-        //            {
-        //                new PacienteRepository().Salvar(p);
-        //            }
-        //            else if (TipoOperacao == TipoOperacaoEnum.Excluir)
-        //            {
-        //                new PacienteRepository().Remover(p);
-        //            }
+                return RedirectToAction("Index");
+            }
 
-        //            ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", model.Codigo, (TipoOperacao == TipoOperacaoEnum.Gravar ? "cadastrado" : "excluído"));
-        //            Limpar();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Mensagem = "Erro: " + ex.Message + ex.InnerException ?? " - " + ex.InnerException.Message;
-        //    }
-        //}
-
-        //public ActionResult Limpar()
-        //{
-        //    return View("Cadastro");
-        //}
-
-        //public ActionResult Buscar(Int64 codigo = 0)
-        //{
-        //    var model = new PacienteModel();
-        //    var a = new object();
-        //    var entity = new PacienteRepository().ObterPeloCodigo(codigo);
-        //    entidadeExiste = entity != null;
-
-        //    if (entidadeExiste)
-        //    {
-        //        model = new PacienteModel()
-        //        {
-        //            Codigo = codigo,
-        //            Nome = entity.Nome,
-        //            DataNascimento = entity.DataNascimento,
-        //            CPF = entity.CPF,
-        //            Email = entity.Email
-        //        };
-        //        a = new
-        //        {
-        //            Codigo = codigo,
-        //            Nome = entity.Nome,
-        //            DataNascimento = entity.DataNascimento,
-        //            CPF = entity.CPF,
-        //            Email = entity.Email
-        //        };
-        //    }
-
-        //    return View(model);
-        //}
-
-        //private PacienteRepository db = new PacienteRepository();
-
-        ////
-        //// GET: /Paciente/
-        //public ActionResult Index()
-        //{
-        //    return View(db.PacienteModels.ToList());
-        //}
+            return View(model);
+        }
 
         //
         // GET: /Paciente/Detalhar/5
@@ -156,56 +86,16 @@ namespace WebApp.Controllers
             }
             else
             {
-                return View(new PacienteModel()
+                var A = new PacienteModel()
                 {
                     Codigo = codigo,
                     Nome = entity.Nome,
-                    DataNascimento = entity.DataNascimento,
+                    DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
                     CPF = entity.CPF,
                     Email = entity.Email
-                });
-            }
-        }
-
-        //
-        // GET: /Paciente/Cadastrar
-        public ActionResult Cadastrar()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Paciente/Cadastrar
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Cadastrar(PacienteModel model)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    db.PacienteModels.Add(PacienteModel);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //return View(PacienteModel);
-
-            if (ModelState.IsValid)
-            {
-                Paciente p = new Paciente
-                {
-                    Codigo = model.Codigo,
-                    Nome = model.Nome,
-                    DataNascimento = model.DataNascimento,
-                    CPF = model.CPF,
-                    Email = model.Email
                 };
-
-                new PacienteRepository().Salvar(p);
-
-                return RedirectToAction("Index");
+                return View(A);
             }
-
-            return View(model);
         }
 
         //
@@ -231,7 +121,7 @@ namespace WebApp.Controllers
                 {
                     Codigo = codigo,
                     Nome = entity.Nome,
-                    DataNascimento = entity.DataNascimento,
+                    DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
                     CPF = entity.CPF,
                     Email = entity.Email
                 });
@@ -241,7 +131,7 @@ namespace WebApp.Controllers
         //
         // POST: /Paciente/Editar/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Editar(PacienteModel model)
         {
             //if (ModelState.IsValid)
@@ -258,7 +148,7 @@ namespace WebApp.Controllers
                 {
                     Codigo = model.Codigo,
                     Nome = model.Nome,
-                    DataNascimento = model.DataNascimento,
+                    DataNascimento = Convert.ToDateTime(model.DataNascimento),
                     CPF = model.CPF,
                     Email = model.Email
                 };
@@ -294,7 +184,7 @@ namespace WebApp.Controllers
                 {
                     Codigo = codigo,
                     Nome = entity.Nome,
-                    DataNascimento = entity.DataNascimento,
+                    DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
                     CPF = entity.CPF,
                     Email = entity.Email
                 });
@@ -304,7 +194,7 @@ namespace WebApp.Controllers
         //
         // POST: /Paciente/Excluir/5
         [HttpPost, ActionName("Excluir")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult ExcluirConfirmed(Int32 codigo)
         {
             //PacienteModel PacienteModel = db.PacienteModels.Find(id);

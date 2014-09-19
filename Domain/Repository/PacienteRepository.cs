@@ -2,6 +2,7 @@
 using Domain.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Domain.Repository
@@ -38,13 +39,13 @@ namespace Domain.Repository
             {
                 using (Conexao con = new Conexao())
                 {
-                    con.Entry(p).State = System.Data.Entity.EntityState.Modified;
+                    con.Entry(p).State = EntityState.Modified;
                     con.SaveChanges();
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao salvar paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
+                throw new Exception("Erro ao atualizar paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
 
@@ -54,6 +55,8 @@ namespace Domain.Repository
             {
                 using (Conexao con = new Conexao())
                 {
+                    if (con.Entry(p).State == EntityState.Detached)
+                        con.Paciente.Attach(p);
                     con.Paciente.Remove(p);
                     con.SaveChanges();
                 }
@@ -75,7 +78,7 @@ namespace Domain.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao listar todos os pacientes: " + e.Message);
+                throw new Exception("Erro ao listar todos os pacientes: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
 
@@ -90,7 +93,7 @@ namespace Domain.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Erro ao obter paciente: " + e.Message);
+                throw new Exception("Erro ao obter paciente: " + e.Message + e.InnerException ?? " - " + e.InnerException.Message);
             }
         }
     }
