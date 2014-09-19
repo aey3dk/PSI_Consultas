@@ -19,27 +19,45 @@
 
 <body>
     <div class="well">
-        <h3>Deseja realmente excluir o este registro?</h3>
+        <h4>Deseja realmente excluir o este registro?</h4>
         <fieldset>
             <legend>Paciente</legend>
 
-            <div class="display-label">
-                @Html.LabelFor(model => model.Codigo):
-                @Html.DisplayFor(model => model.Codigo)
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Codigo, new { @class = "control-label col-sm-3" }):
+                @Html.DisplayFor(model => model.Codigo, new { @class = "form-control" })
             </div>
-            <div class="display-field">
-                @Html.LabelFor(model => model.Nome):
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-sm-3" }):
                 @Html.DisplayFor(model => model.Nome)
+            </div>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.DataNascimento, new { @class = "control-label col-sm-3" }):
+                @Html.DisplayFor(model => model.DataNascimento)
+            </div>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.CPF, new { @class = "control-label col-sm-3" }):
+                @Html.DisplayFor(model => model.CPF)
+            </div>
+            <div class="form-inline">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-sm-3" }):
+                @Html.DisplayFor(model => model.Email)
             </div>
         </fieldset>
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <p>
-                <input type="submit" value="Excluir" class="btn btn-danger btnDefault" /> |
-                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default btnDefault" })
-            </p>
+            
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pager" style="margin: 0px;">
+                        <input type="submit" value="Excluir" class="btn btn-danger btnDefault" /> |
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
+                    </div>
+                </div>
+            </div>
         }
     </div>
 </body>

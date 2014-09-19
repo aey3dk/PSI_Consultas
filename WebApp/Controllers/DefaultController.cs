@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Domain.Repository;
+using System;
 using System.Web.Mvc;
 
 namespace WebApp.Controllers
@@ -16,6 +14,21 @@ namespace WebApp.Controllers
         public ActionResult Home()
         {
             return View();
+        }
+
+        public ActionResult RecriarBaseDados()
+        {
+            try
+            {
+                new BaseRepository().RecriarBaseDados();
+                ViewBag.Mensagem = "Base de dados recriada com sucesso";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensagem = "Erro ao recriar base de dados: " + ex.Message;
+            }
+
+            return View("Index");
         }
     }
 }

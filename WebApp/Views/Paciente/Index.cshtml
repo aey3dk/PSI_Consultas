@@ -12,43 +12,69 @@
     <script src="~/Resources/js/jquery.maskedinput.js"></script>
     <style type="text/css">
         .btnDefault {
-            width: 85px;
+            width: 60px;
         }
     </style>
 </head>
 
 <body>
     <div class="well">
-        <p>
-            @Html.ActionLink("Criar Novo", "Cadastrar", null, new { @class = "btn btn-primary" })
-        </p>
+        @Html.ActionLink("Criar Novo", "Cadastrar", null, new { @class = "btn btn-primary" })
+        <br />
+        <br />
 
-        <table class="table table-bordered">
-            <tr>
-                Pacientes
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Codigo)</th>
-                <th>@Html.DisplayNameFor(model => model.Nome)</th>
-                <th>Ações</th>
-            </tr>
-            @foreach (var item in Model)
-            {
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Detalhar", "Detalhar", new { codigo = item.Codigo }, new { @class = "btn btn-info btnDefault" }) | 
-                        @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }, new { @class = "btn btn-success btnDefault" }) | 
-                        @Html.ActionLink("Excluir", "Excluir", new { codigo = item.Codigo }, new { @class = "btn btn-danger btnDefault" })
-                    </td>
+                    Pacientes
                 </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                    <th>Ações</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalhar", "Detalhar", new { codigo = item.Codigo }, new { @class = "btn btn-xs btn-info btnDefault" }) |
+                            @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }, new { @class = "btn btn-xs btn-success btnDefault" }) |
+                            @Html.ActionLink("Excluir", "Excluir", new { codigo = item.Codigo }, new { @class = "btn btn-xs btn-danger btnDefault" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">Nenhum paciente encontrado na base de dados</div>
+        }
+        @{
+            String mensagem = Convert.ToString(Session["Mensagem"]);
+
+            if (!String.IsNullOrWhiteSpace(mensagem))
+            {
+                if (!mensagem.Contains("Erro"))
+                {
+                    <div class="alert alert-info">
+                        @mensagem
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        @mensagem
+                    </div>
+                }
             }
-        </table>
+        }
     </div>
 </body>
 </html>

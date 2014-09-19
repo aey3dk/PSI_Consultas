@@ -10,6 +10,11 @@
     <script src="~/Resources/js/jquery-1.11.1.js"></script>
     <script src="~/Resources/js/bootstrap.js"></script>
     <script src="~/Resources/js/jquery.maskedinput.js"></script>
+    <style type="text/css">
+        .btnDefault {
+            width: 85px;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#CPF").mask("999.999.999-99");
@@ -42,9 +47,9 @@
         <h4>Cadastro de Paciente</h4>
     </div>
     @*@Html.ActionLink("Incluir", "Limpar", "Paciente", new { @class = "btn btn-info" })*@
-    <br /><br />
+    @*<br />*@<br />
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
     {
         @*<div class="row">
                 <div class="form-group col-md-3">
@@ -97,16 +102,15 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="pager" style="margin: 0px;">
-                    <input type="submit" name="Command" value="Cadastrar" class="btn btn-primary" style="width: 100px;" /> |
+                    <input type="submit" value="Gravar" class="btn btn-primary btnDefault" /> |
                     @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
-                    @*<input type="submit" name="Command" value="Excluir" class="btn btn-danger" style="width: 100px;" />*@
                 </div>
             </div>
         </div>
 
-        <p style="color: red;">
+        <div style="color: red; ">
             @Html.ValidationSummary()
-        </p>
+        </div>
 
         String mensagem = ViewBag.Mensagem;
 
