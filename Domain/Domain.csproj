@@ -51,7 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\UsuarioLogado.cs" />
+    <Compile Include="Entity\Cobranca.cs" />
+    <Compile Include="Entity\Consulta.cs" />
+    <Compile Include="Entity\Convenio.cs" />
+    <Compile Include="Entity\Documento.cs" />
+    <Compile Include="Entity\Endereco.cs" />
+    <Compile Include="Entity\Especialidade.cs" />
     <Compile Include="Entity\Paciente.cs" />
+    <Compile Include="Entity\Pessoa.cs" />
+    <Compile Include="Entity\PessoaFisica.cs" />
+    <Compile Include="Entity\PessoaJuridica.cs" />
+    <Compile Include="Entity\Reserva.cs" />
+    <Compile Include="Entity\Sala.cs" />
+    <Compile Include="Entity\Telefone.cs" />
     <Compile Include="Enum\TipoOperacaoEnum.cs" />
     <Compile Include="Persistence\Conexao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
