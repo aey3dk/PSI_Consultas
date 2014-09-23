@@ -18,10 +18,10 @@ namespace Domain.Entity
 
         [Column("TEL_NUMERO")]
         [Range(1, 999999999)]
-        public Int16 Numero { get; set; }
+        public Int32 Numero { get; set; }
 
         [Column("TEL_RAMAL")]
-        [Range(1, 99999)]
+        [Range(1, 999999)]
         public Int32 Ramal { get; set; }
 
         [Column("TEL_TIPO")]

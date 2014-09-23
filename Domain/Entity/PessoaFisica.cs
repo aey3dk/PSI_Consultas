@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Domain.Entity
 {
     [Table("PESSOAFISICA_PFI")]
-    public class PessoaFisica : BaseEntity
+    public abstract class PessoaFisica : BaseEntity
     {
         [Column("PFI_NOME")]
         [MaxLength(60)]

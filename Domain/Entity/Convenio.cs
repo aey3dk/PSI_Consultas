@@ -17,11 +17,10 @@ namespace Domain.Entity
         public String Email { get; set; }
 
         [Column("COV_NUMEROCARTAO")]
-        [MaxLength(20)]
+        [Range(1, 9999999999999999)]
         public Int64 NumeroCartao { get; set; }
 
         [Column("COV_TIPOPLANOSAUDE")]
-        [MaxLength(60)]
         public TipoPlanoSaudeEnum TipoPlanoSaude { get; set; }
     }
 }

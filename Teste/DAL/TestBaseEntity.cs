@@ -8,15 +8,15 @@ namespace Teste.DAL
     public class TestBaseEntity
     {
         [TestMethod]
-        public void TestPopularBaseDados()
-        {
-            new BaseRepository().PopularBaseDados();
-        }
-
-        [TestMethod]
         public void TestRecriarBaseDados()
         {
             new BaseRepository().RecriarBaseDados();
+        }
+
+        [TestMethod]
+        public void TestPopularBaseDados()
+        {
+            new BaseRepository().PopularBaseDados();
         }
     }
 }

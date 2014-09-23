@@ -29,6 +29,7 @@ namespace DAL.Generics
             try
             {
                 Conexao.Set<T>().Add(obj);
+                Salvar();
             }
             catch
             {

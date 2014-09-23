@@ -13,7 +13,7 @@ namespace Domain.Entity
         public Int32 CEP { get; set; }
 
         [Column("END_LOGRADORO")]
-        [MaxLength(20)]
+        [MaxLength(60)]
         public String Logradoro { get; set; }
 
         [Column("END_NUMERO")]
@@ -25,7 +25,7 @@ namespace Domain.Entity
         public String Complemento { get; set; }
 
         [Column("END_BAIRRO")]
-        [MaxLength(30)]
+        [MaxLength(60)]
         public String Bairro { get; set; }
 
         [Column("END_CIDADE")]
@@ -36,12 +36,11 @@ namespace Domain.Entity
         [MaxLength(2)]
         public String UF { get; set; }
 
-        [Column("END_UF")]
+        [Column("END_PAIS")]
         [MaxLength(60)]
         public String Pais { get; set; }
 
         [Column("END_TIPOLOGRADORO")]
-        [MaxLength(60)]
         public TipoMoradiaEnum TipoMoradia { get; set; }
     }
 }

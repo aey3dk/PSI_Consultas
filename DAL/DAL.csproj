@@ -61,9 +61,7 @@
     <Compile Include="Repository\EnderecoRepository.cs" />
     <Compile Include="Repository\EspecialidadeRepository.cs" />
     <Compile Include="Repository\SalaRepository.cs" />
-    <Compile Include="Repository\PessoaRepository.cs" />
-    <Compile Include="Repository\PessoaFisicaRepository.cs" />
-    <Compile Include="Repository\PessoaJuridicaRepository.cs" />
+    <Compile Include="Repository\ProfissionalRepository.cs" />
     <Compile Include="Repository\ReservaRepository.cs" />
     <Compile Include="Repository\TelefoneRepository.cs" />
     <Compile Include="Repository\PacienteRepository.cs" />
