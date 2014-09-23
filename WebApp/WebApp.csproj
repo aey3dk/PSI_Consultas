@@ -173,6 +173,10 @@
     <Content Include="Views\Paciente\Excluir.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{6fe5a02e-445b-4ab8-ae9a-2e9a97b30566}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{387c35f5-caa0-4736-88ea-d2a8d4597053}</Project>
       <Name>Domain</Name>

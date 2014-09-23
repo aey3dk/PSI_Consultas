@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Data.Entity;
 
-namespace Domain.Persistence
+namespace DAL.Persistence
 {
     public class Conexao : DbContext
     {
@@ -15,8 +15,8 @@ namespace Domain.Persistence
         public DbSet<Especialidade>  Especialidade  { get; set; }
         public DbSet<Paciente>       Paciente       { get; set; }
         public DbSet<Pessoa>         Pessoa         { get; set; }
-        public DbSet<PessoaFisica>   Pessoafisica   { get; set; }
-        public DbSet<PessoaJuridica> Pessoajuridica { get; set; }
+        public DbSet<PessoaFisica>   PessoaFisica   { get; set; }
+        public DbSet<PessoaJuridica> PessoaJuridica { get; set; }
         public DbSet<Reserva>        Reserva        { get; set; }
         public DbSet<Sala>           Sala           { get; set; }
         public DbSet<Telefone>       Telefone       { get; set; }

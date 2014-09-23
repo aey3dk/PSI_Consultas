@@ -1,8 +1,8 @@
-﻿using Domain.Entity;
-using Domain.Persistence;
+﻿using DAL.Persistence;
+using Domain.Entity;
 using System;
 
-namespace Domain.Repository
+namespace DAL.Repository
 {
     public class BaseRepository
     {
@@ -56,7 +56,7 @@ namespace Domain.Repository
         private void PopularPaciente(Int32 i)
         {
             var ind = i.ToString();
-            new PacienteRepository().Salvar(new Paciente
+            new PacienteRepository().Inserir(new Paciente
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -69,7 +69,7 @@ namespace Domain.Repository
         private void PopularCobranca(Int32 i)
         {
             var ind = i.ToString();
-            new CobrancaRepository().Salvar(new Cobranca
+            new CobrancaRepository().Inserir(new Cobranca
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -82,7 +82,7 @@ namespace Domain.Repository
         private void PopularConsulta(Int32 i)
         {
             var ind = i.ToString();
-            new ConsultaRepository().Salvar(new Consulta
+            new ConsultaRepository().Inserir(new Consulta
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -95,7 +95,7 @@ namespace Domain.Repository
         private void PopularConvencio(Int32 i)
         {
             var ind = i.ToString();
-            new ConvencioRepository().Salvar(new Convencio
+            new ConvenioRepository().Inserir(new Convenio
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -108,7 +108,7 @@ namespace Domain.Repository
         private void PopularDocumento(Int32 i)
         {
             var ind = i.ToString();
-            new ConvencioRepository().Salvar(new Convencio
+            new DocumentoRepository().Inserir(new Documento
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -121,7 +121,7 @@ namespace Domain.Repository
         private void PopularEndereco(Int32 i)
         {
             var ind = i.ToString();
-            new EnderecoRepository().Salvar(new Endereco
+            new EnderecoRepository().Inserir(new Endereco
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -134,7 +134,7 @@ namespace Domain.Repository
         private void PopularEspecialidade(Int32 i)
         {
             var ind = i.ToString();
-            new EspecialidadeRepository().Salvar(new Especialidade
+            new EspecialidadeRepository().Inserir(new Especialidade
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -147,7 +147,7 @@ namespace Domain.Repository
         private void PopularPessoa(Int32 i)
         {
             var ind = i.ToString();
-            new PessoaRepository().Salvar(new Pessoa
+            new PessoaRepository().Inserir(new Pessoa
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -160,7 +160,7 @@ namespace Domain.Repository
         private void PopularPessoaFisica(Int32 i)
         {
             var ind = i.ToString();
-            new PessoaFisicaRepository().Salvar(new PessoaFisica
+            new PessoaFisicaRepository().Inserir(new PessoaFisica
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -173,7 +173,7 @@ namespace Domain.Repository
         private void PopularPessoaJuridica(Int32 i)
         {
             var ind = i.ToString();
-            new PessoaJuridicaRepository().Salvar(new PessoaJuridica
+            new PessoaJuridicaRepository().Inserir(new PessoaJuridica
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -186,7 +186,7 @@ namespace Domain.Repository
         private void PopularReserva(Int32 i)
         {
             var ind = i.ToString();
-            new ReservaRepository().Salvar(new Reserva
+            new ReservaRepository().Inserir(new Reserva
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -199,7 +199,7 @@ namespace Domain.Repository
         private void PopularSala(Int32 i)
         {
             var ind = i.ToString();
-            new SalaRepository().Salvar(new Sala
+            new SalaRepository().Inserir(new Sala
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
@@ -212,7 +212,7 @@ namespace Domain.Repository
         private void PopularTelefone(Int32 i)
         {
             var ind = i.ToString();
-            new TelefoneRepository().Salvar(new Telefone
+            new TelefoneRepository().Inserir(new Telefone
             {
                 Codigo = i + 10,
                 Nome = "Paciente " + i + " gerado automaticamente.",
