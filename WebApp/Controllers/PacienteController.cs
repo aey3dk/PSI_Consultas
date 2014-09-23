@@ -1,6 +1,6 @@
-﻿using Domain.Entity;
+﻿using DAL.Repository;
+using Domain.Entity;
 using Domain.Enum;
-using Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -51,16 +51,10 @@ namespace WebApp.Controllers
                     };
 
                     var tipoDeOperacao = (TipoOperacaoEnum)Session["TipoDeOperacao"];
-                    if (tipoDeOperacao == TipoOperacaoEnum.Edicao)
-                    {
-                        new PacienteRepository().Editar(p);
-                        ViewBag.Mensagem = String.Format("Paciente {0} atualizado com sucesso.", p.Codigo);
-                    }
-                    else
-                    {
-                        new PacienteRepository().Salvar(p);
-                        ViewBag.Mensagem = String.Format("Paciente {0} cadastrado com sucesso.", p.Codigo);
-                    }
+
+                    new PacienteRepository().Inserir(p);
+                    new PacienteRepository().Salvar();
+                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Codigo, tipoDeOperacao == TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +80,7 @@ namespace WebApp.Controllers
         // GET: /Paciente/Excluir/5
         public ActionResult Excluir(Int32 codigo = 0)
         {
-            var entity = new PacienteRepository().ObterPeloCodigo(codigo);
+            var entity = new PacienteRepository().Obter(codigo);
 
             if (entity == null)
             {
@@ -116,11 +110,12 @@ namespace WebApp.Controllers
 
                 var repositorio = new PacienteRepository();
 
-                var entity = repositorio.ObterPeloCodigo(codigo);
+                var entity = repositorio.Obter(codigo);
 
                 if (entity != null)
                 {
-                    repositorio.Remover(entity);
+                    repositorio.Excluir(entity);
+                    repositorio.Salvar();
                     Session.Add("Mensagem", String.Format("Paciente removido com sucesso.", entity.Codigo));
                 }
             }
@@ -134,7 +129,7 @@ namespace WebApp.Controllers
 
         private ActionResult ObterEntidadeModelo(Int32 codigo)
         {
-            var entity = new PacienteRepository().ObterPeloCodigo(codigo);
+            var entity = new PacienteRepository().Obter(codigo);
 
             if (entity == null)
             {

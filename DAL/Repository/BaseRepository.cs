@@ -71,11 +71,8 @@ namespace DAL.Repository
             var ind = i.ToString();
             new CobrancaRepository().Inserir(new Cobranca
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Valor = (Decimal)(i + i * 10 + i * 100 + i * 0.1 + i * 0.01),
+                StatusCobranca = (StatusCobrancaEnum)i
             });
         }
 
@@ -84,11 +81,9 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ConsultaRepository().Inserir(new Consulta
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                DataHora = Convert.ToDateTime(ind + "/01/2014"),
+                Observacao = "Observação " + i + " gerado automaticamente.",
+                StatusConsulta = (StatusConsultaEnum)i
             });
         }
 
@@ -97,24 +92,19 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ConvenioRepository().Inserir(new Convenio
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Nome = "Convenio " + i + " gerado automaticamente.",
+                NumeroCartao = Convert.ToInt64(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind)),
+                Tipoplano = (TipoPlanoSaudeEnum)i
             });
         }
-
+        
         private void PopularDocumento(Int32 i)
         {
             var ind = i.ToString();
             new DocumentoRepository().Inserir(new Documento
             {
                 Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Descricao = "Documento " + i + " gerado automaticamente.",
             });
         }
 
@@ -123,11 +113,14 @@ namespace DAL.Repository
             var ind = i.ToString();
             new EnderecoRepository().Inserir(new Endereco
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Cep = Convert.ToInt64(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind)),
+                Logradoro = "Logradoro " + i + " gerado automaticamente.",
+                Numero = Convert.ToInt64(String.Concat(ind, ind, ind, ind, ind)),
+                Complemento = "Complemento " + i + " gerado automaticamente.",
+                Bairro = "Bairro " + i + " gerado automaticamente.",
+                Cidade = "Cidade " + i + " gerado automaticamente.",
+                UF = "RJ",
+                Tipo = (TipoEnderecoEnum)i
             });
         }
 
@@ -137,10 +130,8 @@ namespace DAL.Repository
             new EspecialidadeRepository().Inserir(new Especialidade
             {
                 Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Nome = "Especialidade " + i + " gerado automaticamente.",
+                Descricao = "Descricao " + i + " gerado automaticamente."
             });
         }
 
@@ -149,11 +140,8 @@ namespace DAL.Repository
             var ind = i.ToString();
             new PessoaRepository().Inserir(new Pessoa
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Nome = "Pessoa " + i + " gerado automaticamente.",
+                Email = "email " + i + "geradoAutomaticamente@psi.com"
             });
         }
 
@@ -162,11 +150,12 @@ namespace DAL.Repository
             var ind = i.ToString();
             new PessoaFisicaRepository().Inserir(new PessoaFisica
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
+                Rg = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Naturalidade = (TipoFisicaEnum)i,
+                Nacionalidade = (TipoFisicaEnum)i,
+                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
+                EstadoCivil = (TipoFisicaEnum)i,
             });
         }
 
@@ -175,11 +164,9 @@ namespace DAL.Repository
             var ind = i.ToString();
             new PessoaJuridicaRepository().Inserir(new PessoaJuridica
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                CNPJ = String.Concat(ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "/", ind, ind, ind, "-", ind, ind),
+                InscricaoEstadual = String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind),
+                InscricaoMunicipal = String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind, ind),
             });
         }
 
@@ -188,11 +175,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ReservaRepository().Inserir(new Reserva
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
                 DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
             });
         }
 
@@ -201,11 +184,8 @@ namespace DAL.Repository
             var ind = i.ToString();
             new SalaRepository().Inserir(new Sala
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Numero = Convert.ToInt64(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind, ind)),
+                Tipo = (TipoSalaEnum)i,
             });
         }
 
@@ -214,11 +194,10 @@ namespace DAL.Repository
             var ind = i.ToString();
             new TelefoneRepository().Inserir(new Telefone
             {
-                Codigo = i + 10,
-                Nome = "Paciente " + i + " gerado automaticamente.",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Email = "paciente" + i + "@gmail.com"
+                Numero = String.Concat(ind, " ", ind, ind, ind, ind, "-", ind, ind, ind, ind),
+                DDI = String.Concat(ind, ind, ind),
+                DDD = String.Concat(ind, ind, ind),
+                TipoTelefone = (TipoTelefoneEnum)i,
             });
         }
     }
