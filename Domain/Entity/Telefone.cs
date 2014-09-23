@@ -1,34 +1,30 @@
-﻿using System;
+﻿using Domain.Enum;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entity
 {
-    public enum TipoTelefoneEnum
-    {
-        CELULAR,
-        RESIDENCIAL,
-        COMERCIAL
-    }
-
     [Table("TELEFONE_TEL")]
-    public class Telefone
+    public class Telefone : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("TEL_TIPOTELEFONE")]
-        public TipoTelefoneEnum TipoTelefone { get; set; }
-
         [Column("TEL_DDI")]
-        [MaxLength(3)]
-        public String DDI { get; set; }
+        [Range(1, 999)]
+        public Int16 DDI { get; set; }
 
         [Column("TEL_DDD")]
-        [MaxLength(3)]
-        public String DDD { get; set; }
+        [Range(1, 999)]
+        public Int16 DDD { get; set; }
 
         [Column("TEL_NUMERO")]
-        [MaxLength(10)]
-        public String Numero { get; set; }
+        [Range(1, 999999999)]
+        public Int16 Numero { get; set; }
+
+        [Column("TEL_RAMAL")]
+        [Range(1, 99999)]
+        public Int32 Ramal { get; set; }
+
+        [Column("TEL_TIPO")]
+        public TipoTelefoneEnum Tipo { get; set; }
     }
 }

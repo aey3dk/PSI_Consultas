@@ -1,26 +1,16 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Domain.Enum;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entity
 {
-    public enum StatusCobrancaEnum
-    {
-        Emaberto,
-        EmNegociacao,
-        Cancelada
-    }
-
     [Table("COBRANCA_COB")]
-    public class Cobranca
+    public class Cobranca : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("COB_VALOR")]
-        [Range(1, 999999999999999)]
         public Decimal Valor { get; set; }
 
-        [Column("COB_STATUSCOBRANCA")]
-        public StatusCobrancaEnum StatusCobranca { get; set; }
+        [Column("COB_STATUS")]
+        public StatusCobrancaEnum Status { get; set; }
     }
 }

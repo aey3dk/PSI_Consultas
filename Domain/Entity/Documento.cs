@@ -5,15 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Domain.Entity
 {
     [Table("DOCUMENTO_DOC")]
-    public class Documento
+    public class Documento : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column("COB_CODIGO")]
-        [Range(1, 999999999999999)]
-        public Int32 Codigo { get; set; }
-
         [Column("DOC_DESCRICAO")]
+        [MaxLength(60)]
         public String Descricao { get; set; }
     }
 }
