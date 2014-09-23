@@ -42,5 +42,14 @@ namespace Domain.Entity
 
         [Column("END_TIPOLOGRADORO")]
         public TipoMoradiaEnum TipoMoradia { get; set; }
+
+
+
+
+        [Column("END_IDPESSOAFISICA")]
+        public Int64 IdPessoaFisica { get; set; }
+
+        [ForeignKey("END_IDPESSOAFISICA")]
+        public virtual PessoaFisica PessoaFisica { get; set; }
     }
 }

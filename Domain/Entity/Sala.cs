@@ -1,5 +1,6 @@
 ﻿using Domain.Enum;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,9 @@ namespace Domain.Entity
 
         [Column("SAL_STATUS")]
         public StatusSalaEnum Status { get; set; }
+
+
+
+        public virtual List<Reserva> Reservas { get; set; }
     }
 }

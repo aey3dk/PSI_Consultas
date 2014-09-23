@@ -1,5 +1,6 @@
 ﻿using Domain.Enum;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,5 +23,14 @@ namespace Domain.Entity
 
         [Column("COV_TIPOPLANOSAUDE")]
         public TipoPlanoSaudeEnum TipoPlanoSaude { get; set; }
+
+
+
+
+        public virtual List<Telefone> Telefones { get; set; }
+
+        public virtual List<Paciente> Pacientes { get; set; }
+
+        public virtual List<Profissional> Profissionais { get; set; }
     }
 }

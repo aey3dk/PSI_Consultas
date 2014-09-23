@@ -8,5 +8,32 @@ namespace Domain.Entity
     {
         [Column("RES_DATAHORA")]
         public DateTime DataHora { get; set; }
+
+
+
+
+        [Column("RES_IDPROFISSIONAL")]
+        public Int64 IdProfissional { get; set; }
+
+        [ForeignKey("RES_IDPROFISSIONAL")]
+        public virtual Profissional Profissional { get; set; }
+
+
+
+
+        [Column("RES_IDSALA")]
+        public Int64 IdSala { get; set; }
+
+        [ForeignKey("RES_IDSALA")]
+        public virtual Sala Sala { get; set; }
+
+
+
+
+        [Column("RES_IDCOBRANCA")]
+        public Int64 IdCobranca { get; set; }
+
+        [ForeignKey("RES_IDCOBRANCA")]
+        public virtual Cobranca Cobranca { get; set; }
     }
 }

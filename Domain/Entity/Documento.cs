@@ -10,5 +10,14 @@ namespace Domain.Entity
         [Column("DOC_DESCRICAO")]
         [MaxLength(60)]
         public String Descricao { get; set; }
+
+
+
+
+        [Column("DOC_IDPESSOAFISICA")]
+        public Int64 IdPessoaFisica { get; set; }
+
+        [ForeignKey("DOC_IDPESSOAFISICA")]
+        public virtual PessoaFisica PessoaFisica { get; set; }
     }
 }

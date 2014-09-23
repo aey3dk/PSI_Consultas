@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,9 @@ namespace Domain.Entity
         [Column("ESP_DESCRICAO")]
         [MaxLength(60)]
         public String Descricao { get; set; }
+
+
+
+        public virtual List<Profissional> Profissionais { get; set; }
     }
 }

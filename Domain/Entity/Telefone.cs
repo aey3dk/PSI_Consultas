@@ -26,5 +26,23 @@ namespace Domain.Entity
 
         [Column("TEL_TIPO")]
         public TipoTelefoneEnum Tipo { get; set; }
+
+
+
+
+        [Column("TEL_IDPESSOAFISICA")]
+        public Int64 IdPessoaFisica { get; set; }
+
+        [ForeignKey("TEL_IDPESSOAFISICA")]
+        public virtual PessoaFisica PessoaFisica { get; set; }
+
+
+
+
+        [Column("TEL_IDCONVENIO")]
+        public Int64 IdConvenio { get; set; }
+
+        [ForeignKey("TEL_IDCONVENIO")]
+        public virtual Convenio Convenio { get; set; }
     }
 }
