@@ -4,5 +4,5 @@ using System;
 
 namespace DAL.Repository
 {
-    public class ConsultaRepository : GenericDalEntity<Consulta, Int32> { }
+    public class ConsultaRepository : GenericRepository<Consulta, Int32> { }
 }

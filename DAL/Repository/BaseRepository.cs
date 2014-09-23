@@ -10,14 +10,12 @@ namespace DAL.Repository
         {
             try
             {
-                using (Conexao con = new Conexao())
+                Conexao Conexao = new Conexao();
+                if (Conexao.Database.Exists())
                 {
-                    if (con.Database.Exists())
-                    {
-                        con.Database.Delete();
-                        con.Database.Create();
-                        con.Dispose();
-                    }
+                    Conexao.Database.Delete();
+                    Conexao.Database.Create();
+                    Conexao.Dispose();
                 }
             }
             catch (Exception e)
@@ -32,19 +30,19 @@ namespace DAL.Repository
             {
                 for (Int32 i = 1; i <= 9; i++)
                 {
-                    PopularPaciente(i);
-                    PopularCobranca(i);
-                    PopularConsulta(i);
-                    PopularConvencio(i);
-                    PopularDocumento(i);
-                    PopularEndereco(i);
-                    PopularEspecialidade(i);
-                    PopularPessoa(i);
+                    //PopularPaciente(i);
+                    //PopularCobranca(i);
+                    //PopularConsulta(i);
+                    //PopularConvencio(i);
+                    //PopularDocumento(i);
+                    //PopularEndereco(i);
+                    //PopularEspecialidade(i);
+                    //PopularPessoa(i);
                     PopularPessoaFisica(i);
-                    PopularPessoaJuridica(i);
-                    PopularReserva(i);
-                    PopularSala(i);
-                    PopularTelefone(i);
+                    //PopularPessoaJuridica(i);
+                    //PopularReserva(i);
+                    //PopularSala(i);
+                    //PopularTelefone(i);
                 }
             }
             catch (Exception e)
@@ -97,7 +95,7 @@ namespace DAL.Repository
                 Tipoplano = (TipoPlanoSaudeEnum)i
             });
         }
-        
+
         private void PopularDocumento(Int32 i)
         {
             var ind = i.ToString();
@@ -137,26 +135,29 @@ namespace DAL.Repository
 
         private void PopularPessoa(Int32 i)
         {
-            var ind = i.ToString();
-            new PessoaRepository().Inserir(new Pessoa
-            {
-                Nome = "Pessoa " + i + " gerado automaticamente.",
-                Email = "email " + i + "geradoAutomaticamente@psi.com"
-            });
+            //var ind = i.ToString();
+            //new PessoaRepository().Inserir(new Pessoa
+            //{
+            //    Nome = "Pessoa " + i + " gerado automaticamente.",
+            //    Email = "email " + i + "geradoAutomaticamente@psi.com"
+            //});
         }
 
         private void PopularPessoaFisica(Int32 i)
         {
             var ind = i.ToString();
-            new PessoaFisicaRepository().Inserir(new PessoaFisica
+            var repository = new PessoaFisicaRepository();
+            var pessoaFisica = new PessoaFisica
             {
-                Rg = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
+                Codigo = i + 10,
+                RG = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
-                Naturalidade = (TipoFisicaEnum)i,
-                Nacionalidade = (TipoFisicaEnum)i,
+                Naturalidade = "Naturalidade " + i + " gerado automaticamente.",
+                Nacionalidade = "Nacionalidade " + i + " gerado automaticamente.",
                 DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
-                EstadoCivil = (TipoFisicaEnum)i,
-            });
+                EstadoCivil = "EstadoCivil " + i + " gerado automaticamente.",
+            };
+            repository.Inserir(pessoaFisica);
         }
 
         private void PopularPessoaJuridica(Int32 i)

@@ -4,5 +4,5 @@ using System;
 
 namespace DAL.Repository
 {
-    public class ConvenioRepository : GenericDalEntity<Convenio, Int32> { }
+    public class ConvenioRepository : GenericRepository<Convenio, Int32> { }
 }

@@ -4,5 +4,5 @@ using System;
 
 namespace DAL.Repository
 {
-    public class EnderecoRepository : GenericDalEntity<Endereco, Int32> { }
+    public class EnderecoRepository : GenericRepository<Endereco, Int32> { }
 }

@@ -4,5 +4,5 @@ using System;
 
 namespace DAL.Repository
 {
-    public class CobrancaRepository : GenericDalEntity<Cobranca, Int32> { }
+    public class CobrancaRepository : GenericRepository<Cobranca, Int32> { }
 }

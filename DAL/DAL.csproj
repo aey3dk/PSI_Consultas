@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generics\GenericDalEntity.cs" />
-    <Compile Include="Generics\IGenericDal.cs" />
+    <Compile Include="Generics\GenericRepository.cs" />
+    <Compile Include="Generics\IGenericRepository.cs" />
     <Compile Include="Persistence\Conexao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />

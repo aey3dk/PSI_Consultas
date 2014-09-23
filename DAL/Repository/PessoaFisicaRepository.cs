@@ -4,5 +4,5 @@ using System;
 
 namespace DAL.Repository
 {
-    public class PessoaFisicaRepository : GenericDalEntity<PessoaFisica, Int32> { }
+    public class PessoaFisicaRepository : GenericRepository<PessoaFisica, Int32> { }
 }
