@@ -1,4 +1,5 @@
-﻿using DAL.Persistence;
+﻿using DAL.Model;
+using DAL.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ namespace DAL.Generics
         where T : class
         where K : struct
     {
-        protected Conexao Conexao;
+        //protected Conexao Conexao;
+        protected RepositorioContainer Repositorio;
 
         public GenericRepository()
         {
             try
             {
-                Conexao = new Conexao();
+                //Conexao = new Conexao();
+                Repositorio = new RepositorioContainer();
             }
             catch
             {
@@ -28,7 +31,7 @@ namespace DAL.Generics
         {
             try
             {
-                Conexao.Set<T>().Add(obj);
+                Repositorio.Set<T>().Add(obj);
                 Salvar();
             }
             catch
@@ -41,7 +44,7 @@ namespace DAL.Generics
         {
             try
             {
-                Conexao.Set<T>().Remove(obj);
+                Repositorio.Set<T>().Remove(obj);
             }
             catch
             {
@@ -53,7 +56,7 @@ namespace DAL.Generics
         {
             try
             {
-                Conexao.SaveChanges();
+                Repositorio.SaveChanges();
             }
             catch
             {
@@ -65,7 +68,7 @@ namespace DAL.Generics
         {
             try
             {
-                return Conexao.Set<T>().ToList();
+                return Repositorio.Set<T>().ToList();
             }
             catch
             {
@@ -77,7 +80,7 @@ namespace DAL.Generics
         {
             try
             {
-                return Conexao.Set<T>().Where(filtro).ToList();
+                return Repositorio.Set<T>().Where(filtro).ToList();
             }
             catch
             {
@@ -89,7 +92,7 @@ namespace DAL.Generics
         {
             try
             {
-                return Conexao.Set<T>().Find(chave);                     
+                return Repositorio.Set<T>().Find(chave);                     
             }
             catch
             {
@@ -101,7 +104,7 @@ namespace DAL.Generics
         {
             try
             {
-                return Conexao.Set<T>().Where(filtro).SingleOrDefault();
+                return Repositorio.Set<T>().Where(filtro).SingleOrDefault();
             }
             catch
             {
@@ -111,7 +114,7 @@ namespace DAL.Generics
 
         public void Dispose()
         {
-            Conexao.Dispose();
+            Repositorio.Dispose();
         }
     }
 }

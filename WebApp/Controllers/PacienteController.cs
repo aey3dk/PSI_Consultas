@@ -15,14 +15,14 @@ namespace WebApp.Controllers
             var lista = new List<PacienteModel>();
             foreach (var item in new PacienteRepository().ListarTodos())
             {
-                lista.Add(new PacienteModel()
-                {
-                    Codigo = item.Codigo,
-                    Nome = item.Nome,
-                    DataNascimento = item.DataNascimento.ToString("yyy-MM-dd"),
-                    CPF = item.CPF,
-                    Email = item.Email
-                });
+                //lista.Add(new PacienteModel()
+                //{
+                //    Codigo = item.Codigo,
+                //    Nome = item.Nome,
+                //    DataNascimento = item.DataNascimento.ToString("yyy-MM-dd"),
+                //    CPF = item.CPF,
+                //    Email = item.Email
+                //});
             }
             return View(lista);
         }
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
 
                     var tipoDeOperacao = (TipoOperacaoEnum)Session["TipoDeOperacao"];
 
-                    new PacienteRepository().Inserir(p);
+                    //new PacienteRepository().Inserir(p);
                     new PacienteRepository().Salvar();
                     ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Codigo, tipoDeOperacao == TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
                 }
@@ -92,7 +92,7 @@ namespace WebApp.Controllers
                 {
                     Codigo = codigo,
                     Nome = entity.Nome,
-                    DataNascimento = entity.DataNascimento.ToShortDateString(),
+                    //DataNascimento = entity.DataNascimento.ToShortDateString(),
                     CPF = entity.CPF,
                     Email = entity.Email
                 };
@@ -116,7 +116,7 @@ namespace WebApp.Controllers
                 {
                     repositorio.Excluir(entity);
                     repositorio.Salvar();
-                    Session.Add("Mensagem", String.Format("Paciente removido com sucesso.", entity.Codigo));
+                    //Session.Add("Mensagem", String.Format("Paciente removido com sucesso.", entity.Codigo));
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace WebApp.Controllers
                 {
                     Codigo = codigo,
                     Nome = entity.Nome,
-                    DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
+                    //DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
                     CPF = entity.CPF,
                     Email = entity.Email
                 };

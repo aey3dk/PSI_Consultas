@@ -16,19 +16,19 @@ namespace Domain.Entity
 
 
 
-        [Column("COB_IDRESERVA")]
-        public Int64 IdReserva { get; set; }
+        //[Column("COB_IDRESERVA")]
+        //public Int64 IdReserva { get; set; }
 
-        [ForeignKey("COB_IDRESERVA")]
-        public virtual Reserva Reserva { get; set; }
-
-
+        //[ForeignKey("IdReserva")]
+        //public virtual Reserva Reserva { get; set; }
 
 
-        [Column("COB_IDCONSULTA")]
-        public Int64 IdConsulta { get; set; }
 
-        [ForeignKey("COB_IDCONSULTA")]
-        public virtual Consulta Consulta { get; set; }
+
+        //[Column("COB_IDCONSULTA")]
+        //public Int64 IdConsulta { get; set; }
+
+        //[ForeignKey("IdConsulta")]
+        //public virtual Consulta Consulta { get; set; }
     }
 }

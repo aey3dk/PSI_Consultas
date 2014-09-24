@@ -11,7 +11,7 @@ namespace Domain.Entity
         [Column("PAC_IDENDERECO")]
         public Int64 IdEndereco { get; set; }
 
-        [ForeignKey("PAC_IDENDERECO")]
+        [ForeignKey("IdEndereco")]
         public virtual Endereco Endereco { get; set; }
 
 
@@ -20,7 +20,7 @@ namespace Domain.Entity
         [Column("PAC_IDCONVENIO")]
         public Int64 IdConvenio { get; set; }
 
-        [ForeignKey("PAC_IDCONVENIO")]
+        [ForeignKey("IdConvenio")]
         public virtual Convenio Convenio { get; set; }
 
 

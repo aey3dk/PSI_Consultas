@@ -29,8 +29,6 @@ namespace Domain.Entity
 
         public virtual List<Telefone> Telefones { get; set; }
 
-        public virtual List<Paciente> Pacientes { get; set; }
-
         public virtual List<Profissional> Profissionais { get; set; }
     }
 }

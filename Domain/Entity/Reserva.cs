@@ -15,7 +15,7 @@ namespace Domain.Entity
         [Column("RES_IDPROFISSIONAL")]
         public Int64 IdProfissional { get; set; }
 
-        [ForeignKey("RES_IDPROFISSIONAL")]
+        [ForeignKey("IdProfissional")]
         public virtual Profissional Profissional { get; set; }
 
 
@@ -24,7 +24,7 @@ namespace Domain.Entity
         [Column("RES_IDSALA")]
         public Int64 IdSala { get; set; }
 
-        [ForeignKey("RES_IDSALA")]
+        [ForeignKey("IdSala")]
         public virtual Sala Sala { get; set; }
 
 
@@ -33,7 +33,7 @@ namespace Domain.Entity
         [Column("RES_IDCOBRANCA")]
         public Int64 IdCobranca { get; set; }
 
-        [ForeignKey("RES_IDCOBRANCA")]
+        [ForeignKey("IdCobranca")]
         public virtual Cobranca Cobranca { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace Domain.Entity
         [Column("TEL_IDPESSOAFISICA")]
         public Int64 IdPessoaFisica { get; set; }
 
-        [ForeignKey("TEL_IDPESSOAFISICA")]
+        [ForeignKey("IdPessoaFisica")]
         public virtual PessoaFisica PessoaFisica { get; set; }
 
 
@@ -42,7 +42,7 @@ namespace Domain.Entity
         [Column("TEL_IDCONVENIO")]
         public Int64 IdConvenio { get; set; }
 
-        [ForeignKey("TEL_IDCONVENIO")]
+        [ForeignKey("IdConvenio")]
         public virtual Convenio Convenio { get; set; }
     }
 }

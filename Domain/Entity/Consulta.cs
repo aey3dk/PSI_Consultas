@@ -22,27 +22,27 @@ namespace Domain.Entity
 
 
         [ForeignKey("Paciente")]
-        [Column("CON_IDPACIENTE")]
         public Int64 IdPaciente { get; set; }
 
+        [ForeignKey("IdPaciente")]
         public virtual Paciente Paciente { get; set; }
 
 
 
 
-        [ForeignKey("Profissional")]
         [Column("CON_IDPROFISSIONAL")]
         public Int64 IdProfissional { get; set; }
 
+        [ForeignKey("IdProfissional")]
         public virtual Profissional Profissional { get; set; }
 
 
 
 
-        [ForeignKey("Cobranca")]
         [Column("CON_IDCOBRANCA")]
         public Int64 IdCobranca { get; set; }
 
+        [ForeignKey("IdCobranca")]
         public virtual Cobranca Cobranca { get; set; }
     }
 }

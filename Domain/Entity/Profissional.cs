@@ -18,7 +18,7 @@ namespace Domain.Entity
         [Column("PFI_IDENDERECO")]
         public Int64 IdEndereco { get; set; }
 
-        [ForeignKey("PFI_IDENDERECO")]
+        [ForeignKey("IdEndereco")]
         public virtual Endereco Endereco { get; set; }
 
 

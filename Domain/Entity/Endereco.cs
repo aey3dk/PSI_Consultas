@@ -49,7 +49,7 @@ namespace Domain.Entity
         [Column("END_IDPESSOAFISICA")]
         public Int64 IdPessoaFisica { get; set; }
 
-        [ForeignKey("END_IDPESSOAFISICA")]
+        [ForeignKey("IdPessoaFisica")]
         public virtual PessoaFisica PessoaFisica { get; set; }
     }
 }

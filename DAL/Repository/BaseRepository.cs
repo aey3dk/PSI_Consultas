@@ -1,6 +1,5 @@
-﻿using DAL.Persistence;
-using Domain.Entity;
-using Domain.Enum;
+﻿using DAL.Model;
+using DAL.Persistence;
 using System;
 
 namespace DAL.Repository
@@ -11,12 +10,12 @@ namespace DAL.Repository
         {
             try
             {
-                Conexao Conexao = new Conexao();
-                if (Conexao.Database.Exists())
+                RepositorioContainer Repositorio = new RepositorioContainer();
+                if (Repositorio.Database.Exists())
                 {
-                    Conexao.Database.Delete();
-                    Conexao.Database.Create();
-                    Conexao.Dispose();
+                    Repositorio.Database.Delete();
+                    Repositorio.Database.Create();
+                    Repositorio.Dispose();
                 }
             }
             catch (Exception e)
@@ -37,13 +36,14 @@ namespace DAL.Repository
                     PopularDocumento(i);
                     PopularEndereco(i);
                     PopularEspecialidade(i);
-                    PopularPaciente(i);
-                    PopularProfissional(i);
+                    if ((i % 2).Equals(0))
+                        PopularPaciente(i);
+                    else
+                        PopularProfissional(i);
                     PopularReserva(i);
                     PopularSala(i);
                     PopularTelefone(i);
                 }
-                new Conexao().SaveChanges();
             }
             catch (Exception e)
             {
@@ -56,7 +56,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new CobrancaRepository().Inserir(new Cobranca
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Valor = (Decimal)(i + i * 10 + i * 100 + i * 0.1 + i * 0.01),
                 Status = (StatusCobrancaEnum)i
             });
@@ -67,7 +67,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ConsultaRepository().Inserir(new Consulta
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 DataHora = Convert.ToDateTime(ind + "/01/2014"),
                 Observacao = "Observação " + i + " gerado automaticamente.",
                 Status = (StatusConsultaEnum)i
@@ -79,7 +79,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ConvenioRepository().Inserir(new Convenio
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Nome = "Convenio " + i + " gerado automaticamente.",
                 Email = "convenio " + i + "@gmail.com.",
                 NumeroCartao = Convert.ToInt64(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind, ind)),
@@ -92,7 +92,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new DocumentoRepository().Inserir(new Documento
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Descricao = "Documento " + i + " gerado automaticamente.",
             });
         }
@@ -102,9 +102,9 @@ namespace DAL.Repository
             var ind = i.ToString();
             new EnderecoRepository().Inserir(new Endereco
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
-                CEP = Convert.ToInt32(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind)),
-                Logradoro = "Logradoro " + i + " gerado automaticamente.",
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
+                CEP = String.Concat(ind, ind, ind, ind, ind, ind, ind, ind),
+                Logradouro = "Logradoro " + i + " gerado automaticamente.",
                 Numero = Convert.ToInt32(String.Concat(ind, ind, ind, ind, ind)),
                 Complemento = "Complemento " + i + " gerado automaticamente.",
                 Bairro = "Bairro " + i + " gerado automaticamente.",
@@ -120,7 +120,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new EspecialidadeRepository().Inserir(new Especialidade
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Nome = "Especialidade " + i + " gerado automaticamente.",
                 Descricao = "Descricao " + i + " gerado automaticamente."
             });
@@ -131,10 +131,10 @@ namespace DAL.Repository
             var ind = i.ToString();
             new PacienteRepository().Inserir(new Paciente
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Nome = "Paciente " + i + " gerado automaticamente.",
                 Email = "paciente" + i + "@gmail.com",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
+                Nascimento = Convert.ToDateTime(ind + "/01/2014"),
                 CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 RG = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 Naturalidade = "Naturalidade " + i + " gerado automaticamente.",
@@ -149,26 +149,25 @@ namespace DAL.Repository
             var ind = i.ToString();
             new ProfissionalRepository().Inserir(new Profissional
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Nome = "Profissional " + i + " gerado automaticamente.",
                 Email = "profissional" + i + "@gmail.com",
-                DataNascimento = Convert.ToDateTime(ind + "/01/2014"),
                 CPF = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 RG = String.Concat(ind, ind, ind, ".", ind, ind, ind, ".", ind, ind, ind, "-", ind, ind),
                 Naturalidade = "Naturalidade " + i + " gerado automaticamente.",
                 Nacionalidade = "Nacionalidade " + i + " gerado automaticamente.",
-                EstadoCivil = (EstadoCivilEnum)i,
-                Sexo = (SexoEnum)i,
+                EstadoCivil = (DAL.Model.EstadoCivilEnum)i,
+                Sexo = (DAL.Model.SexoEnum)i,
                 NumeroConselho = Convert.ToInt32(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind)),
             });
         }
-        
+
         private void PopularReserva(Int32 i)
         {
             var ind = i.ToString();
             new ReservaRepository().Inserir(new Reserva
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 DataHora = Convert.ToDateTime(ind + "/01/2014"),
             });
         }
@@ -178,7 +177,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new SalaRepository().Inserir(new Sala
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 Numero = Convert.ToInt32(String.Concat(ind, ind, ind, ind, ind)),
                 Status = (StatusSalaEnum)i,
             });
@@ -189,7 +188,7 @@ namespace DAL.Repository
             var ind = i.ToString();
             new TelefoneRepository().Inserir(new Telefone
             {
-                Codigo = Convert.ToInt64(String.Concat(ind, ind, ind)),
+                Id = Convert.ToInt32(String.Concat(ind, ind, ind)),
                 DDI = Convert.ToInt16(String.Concat(ind, ind, ind)),
                 DDD = Convert.ToInt16(String.Concat(ind, ind, ind)),
                 Numero = Convert.ToInt32(String.Concat(ind, ind, ind, ind, ind, ind, ind, ind, ind)),

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5aaf497d3a5f4bb383cc541c96c84c01" Name="Diagram1" ShowGrid="true" DisplayType="true" ZoomLevel="99" >
+        <EntityTypeShape EntityType="Repositorio.Paciente" Width="1.5" PointX="4.25" PointY="4.875" />
+        <EntityTypeShape EntityType="Repositorio.Profissional" Width="2" PointX="6.625" PointY="4.875" />
+        <EntityTypeShape EntityType="Repositorio.Pessoa" Width="2.125" PointX="5.125" PointY="0.5" />
+        <EntityTypeShape EntityType="Repositorio.Convenio" Width="2.75" PointX="0.75" PointY="6.625" />
+        <InheritanceConnector EntityType="Repositorio.Paciente" ManuallyRouted="false" >
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="Repositorio.Profissional" ManuallyRouted="false" >
+        </InheritanceConnector>
+        <AssociationConnector Association="Repositorio.ConvenioPaciente" />
+        <EntityTypeShape EntityType="Repositorio.Documento" Width="1.5" PointX="2" PointY="0.5" />
+        <EntityTypeShape EntityType="Repositorio.Telefone" Width="1.875" PointX="1.625" PointY="2.75" />
+        <EntityTypeShape EntityType="Repositorio.Endereco" Width="2.375" PointX="9.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Repositorio.Sala" Width="1.875" PointX="9.125" PointY="4.875" />
+        <EntityTypeShape EntityType="Repositorio.Reserva" Width="1.75" PointX="8" PointY="7.375" />
+        <EntityTypeShape EntityType="Repositorio.Cobranca" Width="2.125" PointX="6.625" PointY="10.875" />
+        <EntityTypeShape EntityType="Repositorio.Consulta" Width="2.125" PointX="5.125" PointY="7.375" />
+        <EntityTypeShape EntityType="Repositorio.Especialidade" Width="1.5" PointX="7.625" PointY="2.25" />
+        <AssociationConnector Association="Repositorio.PessoaDocumento"></AssociationConnector>
+        <AssociationConnector Association="Repositorio.PessoaEndereco" />
+        <AssociationConnector Association="Repositorio.PessoaTelefone" />
+        <AssociationConnector Association="Repositorio.ConvenioTelefone" ></AssociationConnector>
+        <AssociationConnector Association="Repositorio.ConsultaCobranca" />
+        <AssociationConnector Association="Repositorio.ReservaCobranca" />
+        <AssociationConnector Association="Repositorio.ProfissionalEspecialidade" />
+        <AssociationConnector Association="Repositorio.PacienteConsulta" ></AssociationConnector>
+        <AssociationConnector Association="Repositorio.ProfissionalConsulta" ></AssociationConnector>
+        <AssociationConnector Association="Repositorio.ProfissionalReserva" />
+        <AssociationConnector Association="Repositorio.SalaReserva" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

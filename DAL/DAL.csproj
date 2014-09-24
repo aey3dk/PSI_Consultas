@@ -42,6 +42,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +53,81 @@
   <ItemGroup>
     <Compile Include="Generics\GenericRepository.cs" />
     <Compile Include="Generics\IGenericRepository.cs" />
+    <Compile Include="Model\Cobranca.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Consulta.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Convenio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Documento.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Endereco.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Especialidade.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EstadoCivilEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Paciente.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Pessoa.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Profissional.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Repositorio.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repositorio.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Repositorio.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Repositorio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repositorio.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Reserva.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sala.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SexoEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StatusCobrancaEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StatusConsultaEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StatusSalaEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Telefone.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TipoMoradiaEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TipoPlanoSaudeEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TipoTelefoneEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Conexao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
@@ -68,6 +145,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="Model\Repositorio.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Repositorio.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Repositorio.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repositorio.Context.cs</LastGenOutput>
+      <DependentUpon>Repositorio.edmx</DependentUpon>
+    </None>
+    <None Include="Model\Repositorio.edmx.diagram">
+      <DependentUpon>Repositorio.edmx</DependentUpon>
+    </None>
+    <None Include="Model\Repositorio.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repositorio.cs</LastGenOutput>
+      <DependentUpon>Repositorio.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +169,12 @@
       <Project>{387c35f5-caa0-4736-88ea-d2a8d4597053}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\Repositorio.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

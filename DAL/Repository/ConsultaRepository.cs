@@ -1,5 +1,5 @@
 ﻿using DAL.Generics;
-using Domain.Entity;
+using DAL.Model;
 using System;
 
 namespace DAL.Repository

@@ -17,7 +17,7 @@ namespace Domain.Entity
         [Column("DOC_IDPESSOAFISICA")]
         public Int64 IdPessoaFisica { get; set; }
 
-        [ForeignKey("DOC_IDPESSOAFISICA")]
+        [ForeignKey("IdPessoaFisica")]
         public virtual PessoaFisica PessoaFisica { get; set; }
     }
 }
