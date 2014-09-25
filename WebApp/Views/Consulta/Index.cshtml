@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApp.Models.PacienteModel>
+﻿@model IEnumerable<WebApp.Models.ConsultaModel>
 
 <!DOCTYPE html>
 
@@ -31,7 +31,8 @@
                 <thead>
                     <tr>
                         <th width="15%" class="pager">@Html.DisplayNameFor(model => model.Id)</th>
-                        <th width="69%" class="pager">@Html.DisplayNameFor(model => model.Nome)</th>
+                        <th width="34.5%" class="pager">@Html.DisplayNameFor(model => model.DataHora)</th>
+                        <th width="34.5%" class="pager">@Html.DisplayNameFor(model => model.Status)</th>
                         <th width="12%" class="pager">Ações</th>
                     </tr>
                 </thead>
@@ -43,12 +44,15 @@
                                 @Html.DisplayFor(modelItem => item.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
+                                @Html.DisplayFor(modelItem => item.DataHora)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td class=".col-md-4">
-                                @Html.ActionLink(" ", "Detalhar", new { codigo = item.Id }, new { @class = "btn btn-xs btn-info btnDefault glyphicon glyphicon-list" })
-                                @Html.ActionLink(" ", "Editar", new { codigo = item.Id }, new { @class = "btn btn-xs btn-success btnDefault glyphicon glyphicon-pencil" })
-                                @Html.ActionLink(" ", "Excluir", new { codigo = item.Id }, new { @class = "btn btn-xs btn-danger btnDefault glyphicon glyphicon-remove" })
+                                @Html.ActionLink(" ", "Detalhar", new { id = item.Id }, new { @class = "btn btn-xs btn-info btnDefault glyphicon glyphicon-list" })
+                                @Html.ActionLink(" ", "Editar", new { id = item.Id }, new { @class = "btn btn-xs btn-success btnDefault glyphicon glyphicon-pencil" })
+                                @Html.ActionLink(" ", "Excluir", new { id = item.Id }, new { @class = "btn btn-xs btn-danger btnDefault glyphicon glyphicon-remove" })
                             </td>
                         </tr>
                     }

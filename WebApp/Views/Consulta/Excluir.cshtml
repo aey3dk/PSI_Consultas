@@ -1,0 +1,68 @@
+﻿@model WebApp.Models.ConsultaModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Resources/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Resources/js/jquery-1.11.1.js"></script>
+    <script src="~/Resources/js/bootstrap.js"></script>
+    <script src="~/Resources/js/jquery.maskedinput.js"></script>
+    <style type="text/css">
+        .btnDefault {
+            width: 85px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="well">
+        <div class="pager" style="margin: 0px;">
+            <h4>Cadastro de Consulta</h4>
+        </div>
+        <h4>Deseja realmente excluir o este registro?</h4>
+        <br />
+
+        <div class="form-inline">
+            @Html.LabelFor(model => model.Id, new { @class = "control-label col-sm-3" }):
+            @Html.DisplayFor(model => model.Id, new { @class = "form-control" })
+        </div>
+        <div class="form-inline">
+            @Html.LabelFor(model => model.ProfissionalId, new { @class = "control-label col-sm-3" }):
+            @Html.DisplayFor(model => model.ProfissionalId) - 
+            @Html.DisplayFor(model => model.ProfissionalNome)
+        </div>
+        <div class="form-inline">
+            @Html.LabelFor(model => model.PacienteId, new { @class = "control-label col-sm-3" }):
+            @Html.DisplayFor(model => model.PacienteId) - 
+            @Html.DisplayFor(model => model.PacienteNome)
+        </div>
+        <div class="form-inline">
+            @Html.LabelFor(model => model.DataHora, new { @class = "control-label col-sm-3" }):
+            @Html.DisplayFor(model => model.DataHora)
+        </div>
+        <div class="form-inline">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-sm-3" }):
+            @Html.DisplayFor(model => model.Status)
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="pager" style="margin: 0px;">
+                        <input type="submit" value="Excluir" class="btn btn-danger btnDefault" /> |
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btnDefault" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+

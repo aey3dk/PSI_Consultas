@@ -1,7 +1,7 @@
 ﻿using DAL.Model;
-using DAL.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -26,13 +26,12 @@ namespace DAL.Generics
                 throw;
             }
         }
-        
-        public void Inserir(T obj)
+
+        public GenericRepository(RepositorioContainer Repositorio)
         {
             try
             {
-                Repositorio.Set<T>().Add(obj);
-                Salvar();
+                this.Repositorio = Repositorio;
             }
             catch
             {
@@ -40,11 +39,29 @@ namespace DAL.Generics
             }
         }
 
-        public void Excluir(T obj)
+        public void Inserir(T entity)
         {
             try
             {
-                Repositorio.Set<T>().Remove(obj);
+                if (Repositorio.Entry(entity).State == EntityState.Detached)
+                    //Repositorio.Set<T>().Attach(entity);
+                    Repositorio.Entry(entity).State = EntityState.Modified;
+                else
+                    Repositorio.Set<T>().Add(entity);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void Excluir(T entity)
+        {
+            try
+            {
+                //if (Repositorio.Entry(entity).State == EntityState.Detached)
+                //    Repositorio.Set<T>().Attach(entity);
+                Repositorio.Set<T>().Remove(entity);
             }
             catch
             {
@@ -92,7 +109,7 @@ namespace DAL.Generics
         {
             try
             {
-                return Repositorio.Set<T>().Find(chave);                     
+                return Repositorio.Set<T>().Find(chave);
             }
             catch
             {

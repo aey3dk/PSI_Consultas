@@ -1,5 +1,6 @@
-﻿using DAL.Repository;
-using Domain.Entity;
+﻿using DAL.Model;
+using DAL.Repository;
+//using Domain.Entity;
 using Domain.Enum;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var lista = new List<PacienteModel>();
-            foreach (var item in new PacienteRepository().ListarTodos())
+            foreach (var paciente in new PacienteRepository().ListarTodos())
             {
-                //lista.Add(new PacienteModel()
-                //{
-                //    Codigo = item.Codigo,
-                //    Nome = item.Nome,
-                //    DataNascimento = item.DataNascimento.ToString("yyy-MM-dd"),
-                //    CPF = item.CPF,
-                //    Email = item.Email
-                //});
+                lista.Add(new PacienteModel()
+                {
+                    Id = paciente.Id,
+                    Nome = paciente.Nome,
+                    DataNascimento = paciente.Nascimento != null ? ((DateTime)paciente.Nascimento).ToString("yyy-MM-dd") : String.Empty,
+                    CPF = paciente.CPF,
+                    Email = paciente.Email
+                });
             }
             return View(lista);
         }
@@ -43,18 +44,19 @@ namespace WebApp.Controllers
                 {
                     Paciente p = new Paciente
                     {
-                        Codigo = model.Codigo,
+                        Id = model.Id,
                         Nome = model.Nome,
-                        DataNascimento = Convert.ToDateTime(model.DataNascimento),
+                        Nascimento = Convert.ToDateTime(model.DataNascimento),
                         CPF = model.CPF,
                         Email = model.Email
                     };
 
                     var tipoDeOperacao = (TipoOperacaoEnum)Session["TipoDeOperacao"];
 
-                    //new PacienteRepository().Inserir(p);
+                    new PacienteRepository().Inserir(p);
                     new PacienteRepository().Salvar();
-                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Codigo, tipoDeOperacao == TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
+
+                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Id, tipoDeOperacao == TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
                 }
                 catch (Exception ex)
                 {
@@ -66,57 +68,55 @@ namespace WebApp.Controllers
         }
 
         // GET: /Paciente/Detalhar/5
-        public ActionResult Detalhar(Int32 codigo = 0)
+        public ActionResult Detalhar(Int32 id = 0)
         {
-            return ObterEntidadeModelo(codigo);
+            return ObterEntidadeModelo(id);
         }
 
         // GET: /Paciente/Editar/5
-        public ActionResult Editar(Int32 codigo = 0)
+        public ActionResult Editar(Int32 id = 0)
         {
-            return ObterEntidadeModelo(codigo);
+            return ObterEntidadeModelo(id);
         }
 
         // GET: /Paciente/Excluir/5
-        public ActionResult Excluir(Int32 codigo = 0)
+        public ActionResult Excluir(Int32 id = 0)
         {
-            var entity = new PacienteRepository().Obter(codigo);
+            var paciente = new PacienteRepository().Obter(id);
 
-            if (entity == null)
+            if (paciente == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                var A = new PacienteModel()
+                return View(new PacienteModel()
                 {
-                    Codigo = codigo,
-                    Nome = entity.Nome,
-                    //DataNascimento = entity.DataNascimento.ToShortDateString(),
-                    CPF = entity.CPF,
-                    Email = entity.Email
-                };
-
-                return View(A);
+                    Id = id,
+                    Nome = paciente.Nome,
+                    DataNascimento = paciente.Nascimento != null ? ((DateTime)paciente.Nascimento).ToShortDateString() : String.Empty,
+                    CPF = paciente.CPF,
+                    Email = paciente.Email
+                });
             }
         }
 
         // POST: /Paciente/Excluir/5
         [HttpPost, ActionName("Excluir")]
-        public ActionResult ExclusaoConfirmada(Int32 codigo)
+        public ActionResult ExclusaoConfirmada(Int32 id)
         {
             try
             {
 
                 var repositorio = new PacienteRepository();
 
-                var entity = repositorio.Obter(codigo);
+                var paciente = repositorio.Obter(id);
 
-                if (entity != null)
+                if (paciente != null)
                 {
-                    repositorio.Excluir(entity);
+                    repositorio.Excluir(paciente);
                     repositorio.Salvar();
-                    //Session.Add("Mensagem", String.Format("Paciente removido com sucesso.", entity.Codigo));
+                    Session.Add("Mensagem", String.Format("Paciente removido com sucesso.", paciente.Id));
                 }
             }
             catch (Exception ex)
@@ -127,28 +127,26 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        private ActionResult ObterEntidadeModelo(Int32 codigo)
+        private ActionResult ObterEntidadeModelo(Int32 id)
         {
-            var entity = new PacienteRepository().Obter(codigo);
+            var paciente = new PacienteRepository().Obter(id);
 
-            if (entity == null)
+            if (paciente == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                var A = new PacienteModel()
-                {
-                    Codigo = codigo,
-                    Nome = entity.Nome,
-                    //DataNascimento = entity.DataNascimento.ToString("yyy-MM-dd"),
-                    CPF = entity.CPF,
-                    Email = entity.Email
-                };
-
                 Session.Add("TipoDeOperacao", TipoOperacaoEnum.Edicao);
 
-                return View("Cadastrar", A);
+                return View("Cadastrar", new PacienteModel()
+                {
+                    Id = id,
+                    Nome = paciente.Nome,
+                    DataNascimento = paciente.Nascimento != null ? ((DateTime)paciente.Nascimento).ToString("yyy-MM-dd") : String.Empty,
+                    CPF = paciente.CPF,
+                    Email = paciente.Email
+                });
             }
         }
     }

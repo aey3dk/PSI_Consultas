@@ -1,4 +1,4 @@
-﻿@model WebApp.Models.PacienteModel
+﻿@model WebApp.Models.ConsultaModel
 
 <!DOCTYPE html>
 
@@ -24,42 +24,42 @@
 <body>
     <div class="well">
         <div class="pager" style="margin: 0px;">
-            <h4>Cadastro de Paciente</h4>
+            <h4>Cadastro de Consulta</h4>
         </div>
         <br />
 
-        @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post))
+        @using (Html.BeginForm("Cadastrar", "Consulta", FormMethod.Post))
         {
             <div class="row">
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(p => p.Id)
-                    @Html.TextBoxFor(p => p.Id, new { @class = "form-control", @type = "number", @maxLength = 15 })
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.Id)
+                    @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @type = "number", @maxLength = 15 })
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(p => p.Nome)
-                    @Html.TextBoxFor(p => p.Nome, new { @class = "form-control", @maxLength = 60 })
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.ProfissionalId)
+                    @Html.TextBoxFor(model => model.ProfissionalId, new { @class = "form-control", @type = "number", @maxLength = 15 })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.PacienteId)
+                    @Html.TextBoxFor(model => model.PacienteId, new { @class = "form-control", @type = "number", @maxLength = 15 })
                 </div>
             </div>
 
             <div class="form-inline">
                 <div class="form-group" style="margin: 0 30px 15px 0;">
-                    @Html.LabelFor(p => p.DataNascimento) <br />
-                    @Html.TextBoxFor(p => p.DataNascimento, new { @class = "form-control", @type = "date" })
+                    @Html.LabelFor(model => model.DataHora) <br />
+                    @Html.TextBoxFor(model => model.DataHora, new { @class = "form-control", @type = "date" })
                 </div>
 
                 <div class="form-group" style="margin-bottom: 15px;">
-                    @Html.LabelFor(p => p.CPF) <br />
-                    @Html.TextBoxFor(p => p.CPF, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(p => p.Email)
-                    @Html.TextBoxFor(p => p.Email, new { @type = "email", @class = "form-control", @maxLength = 60 })
+                    @Html.LabelFor(model => model.Status) <br />
+                    @Html.DropDownListFor(model => model.Status, new SelectList(Enum.GetValues(typeof(DAL.Model.StatusConsultaEnum))), null, new { @class = "form-control" })
                 </div>
             </div>
 

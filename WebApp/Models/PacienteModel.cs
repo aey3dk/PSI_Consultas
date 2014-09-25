@@ -8,7 +8,7 @@ namespace WebApp.Models
         [Display(Name = "Código")]
         [Required(ErrorMessage = "O campo código é obrigatório")]
         [Range(1, 999999999999999, ErrorMessage = "O campo código deve possuir no máximo 15 dígitos")]
-        public Int64 Codigo { get; set; }
+        public Int32 Id { get; set; }
 
         [Display(Name = "Nome completo")]
         [Required(ErrorMessage = "O campo descrição é obrigatório")]

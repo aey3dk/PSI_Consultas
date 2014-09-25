@@ -4,5 +4,10 @@ using System;
 
 namespace DAL.Repository
 {
-    public class PacienteRepository : GenericRepository<Paciente, Int32> { }
+    public class PacienteRepository : GenericRepository<Paciente, Int32>
+    {
+        public PacienteRepository() : base() { }
+
+        public PacienteRepository(RepositorioContainer repositorio) : base(repositorio) { }
+    }
 }
