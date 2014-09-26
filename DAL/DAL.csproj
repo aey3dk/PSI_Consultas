@@ -122,6 +122,9 @@
     <Compile Include="Model\TipoMoradiaEnum.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TipoOperacaoEnum.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TipoPlanoSaudeEnum.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Conexao.cs" />
+    <Compile Include="Persistence\DataBaseContextSingleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ConsultaRepository.cs" />
@@ -142,6 +146,12 @@
     <Compile Include="Repository\ReservaRepository.cs" />
     <Compile Include="Repository\TelefoneRepository.cs" />
     <Compile Include="Repository\PacienteRepository.cs" />
+    <Compile Include="Util\Mensagem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mensagem.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\TipoOperacaoEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -175,6 +185,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\Repositorio.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Util\Mensagem.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mensagem.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

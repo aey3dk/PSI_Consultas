@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entity
 {
+    [Obsolete("Classe obsoleta, substituída pela nova engenharia de comunicação com a base de dados")]
     [Table("RESERVA_RES")]
     public class Reserva : BaseEntity
     {

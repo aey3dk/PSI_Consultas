@@ -1,9 +1,11 @@
 ﻿using Domain.Entity;
+using System;
 using System.Configuration;
 using System.Data.Entity;
 
 namespace DAL.Persistence
 {
+    [Obsolete("Classe obsoleta, substituída pela nova engenharia de comunicação com a base de dados")]
     public class Conexao : DbContext
     {
         public Conexao() : base(ConfigurationManager.ConnectionStrings["Local"].ConnectionString) { }

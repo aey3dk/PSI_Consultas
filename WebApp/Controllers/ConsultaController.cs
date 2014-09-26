@@ -1,7 +1,7 @@
 ﻿using DAL.Model;
 using DAL.Repository;
+using DAL.Util;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WebApp.Models;
@@ -34,38 +34,57 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    RepositorioContainer repositorio = new RepositorioContainer();
-                    var profissional = new ProfissionalRepository(repositorio).Obter(model.ProfissionalId);
+                    //RepositorioContainer repositorio = new RepositorioContainer();
+                    
+                    var profissional = new ProfissionalRepository().Obter(model.ProfissionalId);
                     if (profissional == null)
                     {
-                        ModelState.AddModelError("Inexistência", String.Format("Profissional {0} não encontrado", model.ProfissionalId));
+                        ModelState.AddModelError("Inexistência", String.Format(Mensagem.RegistroNaoEncontrado, "Profissional", model.ProfissionalId));
                     }
 
-                    var paciente = new PacienteRepository(repositorio).Obter(model.PacienteId);
+                    var paciente = new PacienteRepository().Obter(model.PacienteId);
                     if (paciente == null)
                     {
-                        ModelState.AddModelError("Inexistência", String.Format("Paciente {0} não encontrado", model.PacienteId));
+                        ModelState.AddModelError("Inexistência", String.Format(Mensagem.RegistroNaoEncontrado, "Paciente", model.PacienteId));
                     }
 
                     if (ModelState.IsValid)
                     {
-                        Consulta consulta = new Consulta
-                        {
-                            Id = model.Id,
-                            Paciente = paciente,
-                            PacienteId = paciente.Id,
-                            Profissional = profissional,
-                            ProfissionalId = profissional.Id,
-                            DataHora = Convert.ToDateTime(model.DataHora),
-                            Status = model.Status
-                        };
-                        var ConsultaRepository = new ConsultaRepository(repositorio);
-                        ConsultaRepository.Inserir(consulta);
-                        ConsultaRepository.Salvar();
+                        var consultaRepository = new ConsultaRepository();
+                        Consulta consulta = consultaRepository.Obter(model.Id);
+                        TipoOperacaoEnum tipoDeOperacao;
 
-                        //var tipoDeOperacao = (Domain.Enum.TipoOperacaoEnum)Session["TipoDeOperacao"];
-                        ViewBag.Mensagem = String.Format("Consulta {0} cadastrada com sucesso.", consulta.Id);
-                        //ViewBag.Mensagem = String.Format("Consulta {0} {1} com sucesso.", consulta.Id, tipoDeOperacao == Domain.Enum.TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
+                        if (consulta == null)
+                        {
+                            consulta = new Consulta
+                            {
+                                Id = model.Id,
+                                Paciente = paciente,
+                                PacienteId = paciente.Id,
+                                Profissional = profissional,
+                                ProfissionalId = profissional.Id,
+                                DataHora = Convert.ToDateTime(model.DataHora),
+                                Status = model.Status
+                            };
+
+                            tipoDeOperacao = TipoOperacaoEnum.Insercao;
+                        }
+                        else
+                        {
+                            consulta.Paciente = paciente;
+                            consulta.PacienteId = paciente.Id;
+                            consulta.Profissional = profissional;
+                            consulta.ProfissionalId = profissional.Id;
+                            consulta.DataHora = Convert.ToDateTime(model.DataHora);
+                            consulta.Status = model.Status;
+
+                            tipoDeOperacao = TipoOperacaoEnum.Alteracao;
+                        }
+
+                        consultaRepository.Inserir(consulta);
+                        consultaRepository.Salvar();
+
+                        ViewBag.Mensagem = String.Format((tipoDeOperacao == TipoOperacaoEnum.Insercao ? Mensagem.Inclusao : Mensagem.Alteracao), consulta.Id);
                     }
                 }
                 catch (Exception ex)
@@ -110,17 +129,17 @@ namespace WebApp.Controllers
         {
             try
             {
-
                 var repositorio = new ConsultaRepository();
 
                 var consulta = repositorio.Obter(id);
-
                 if (consulta != null)
                 {
                     repositorio.Excluir(consulta);
                     repositorio.Salvar();
-                    Session.Add("Mensagem", String.Format("Consulta removido com sucesso.", consulta.Id));
+                    Session.Add("Mensagem", String.Format(Mensagem.Remocao, consulta.Id));
                 }
+                else
+                    Session.Add("Mensagem", String.Format(Mensagem.RegistroNaoEncontrado, "Consulta", consulta.Id));
             }
             catch (Exception ex)
             {
@@ -140,7 +159,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                Session.Add("TipoDeOperacao", Domain.Enum.TipoOperacaoEnum.Edicao);
+                Session.Add("TipoDeOperacao", TipoOperacaoEnum.Alteracao);
 
                 return View("Cadastrar", MapearEntidadeEmModelo(consulta));
             }

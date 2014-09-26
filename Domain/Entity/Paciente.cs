@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entity
 {
+    [Obsolete("Classe obsoleta, substituída pela nova engenharia de comunicação com a base de dados")]
     [Table("PACIENTE_PAC")]
     public class Paciente : PessoaFisica
     {

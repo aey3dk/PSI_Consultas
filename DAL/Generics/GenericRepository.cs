@@ -1,4 +1,5 @@
 ﻿using DAL.Model;
+using DAL.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,12 +20,10 @@ namespace DAL.Generics
             try
             {
                 //Conexao = new Conexao();
-                Repositorio = new RepositorioContainer();
+                //Repositorio = new RepositorioContainer();
+                Repositorio = DataBaseContextSingleton.DataBaseContext;
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public GenericRepository(RepositorioContainer Repositorio)
@@ -33,26 +32,22 @@ namespace DAL.Generics
             {
                 this.Repositorio = Repositorio;
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public void Inserir(T entity)
         {
             try
             {
-                if (Repositorio.Entry(entity).State == EntityState.Detached)
-                    //Repositorio.Set<T>().Attach(entity);
-                    Repositorio.Entry(entity).State = EntityState.Modified;
-                else
-                    Repositorio.Set<T>().Add(entity);
+                if (Repositorio.Entry(entity).State != EntityState.Unchanged && Repositorio.Entry(entity).State != EntityState.Modified)
+                {
+                    //if (Repositorio.Entry(entity).State == EntityState.Detached)
+                    //    Repositorio.Entry(entity).State = EntityState.Modified;
+                    //else
+                        Repositorio.Set<T>().Add(entity);
+                }
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public void Excluir(T entity)
@@ -63,10 +58,7 @@ namespace DAL.Generics
                 //    Repositorio.Set<T>().Attach(entity);
                 Repositorio.Set<T>().Remove(entity);
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public void Salvar()
@@ -75,10 +67,7 @@ namespace DAL.Generics
             {
                 Repositorio.SaveChanges();
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public List<T> ListarTodos()
@@ -87,10 +76,7 @@ namespace DAL.Generics
             {
                 return Repositorio.Set<T>().ToList();
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public List<T> ListarTodos(Expression<Func<T, Boolean>> filtro)
@@ -99,10 +85,7 @@ namespace DAL.Generics
             {
                 return Repositorio.Set<T>().Where(filtro).ToList();
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public T Obter(K chave)
@@ -111,10 +94,7 @@ namespace DAL.Generics
             {
                 return Repositorio.Set<T>().Find(chave);
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public T Obter(Expression<Func<T, Boolean>> filtro)
@@ -123,10 +103,7 @@ namespace DAL.Generics
             {
                 return Repositorio.Set<T>().Where(filtro).SingleOrDefault();
             }
-            catch
-            {
-                throw;
-            }
+            catch { throw; }
         }
 
         public void Dispose()

@@ -31,9 +31,11 @@
                 <thead>
                     <tr>
                         <th width="15%" class="pager">@Html.DisplayNameFor(model => model.Id)</th>
-                        <th width="34.5%" class="pager">@Html.DisplayNameFor(model => model.DataHora)</th>
-                        <th width="34.5%" class="pager">@Html.DisplayNameFor(model => model.Status)</th>
-                        <th width="12%" class="pager">Ações</th>
+                        <th width="17.5%" class="pager">Profissional</th>
+                        <th width="17.5%" class="pager">Paciente</th>
+                        <th width="17.5%" class="pager">@Html.DisplayNameFor(model => model.DataHora)</th>
+                        <th width="17.5%" class="pager">@Html.DisplayNameFor(model => model.Status)</th>
+                        <th width="15%" class="pager">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +44,12 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProfissionalId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PacienteId)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.DataHora)

@@ -734,6 +734,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="TipoOperacaoEnum">
+          <Member Name="Insercao" />
+          <Member Name="Alteracao" />
+        </EnumType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

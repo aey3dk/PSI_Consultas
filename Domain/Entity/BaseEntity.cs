@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entity
 {
+    [Obsolete("Classe obsoleta, substituída pela nova engenharia de comunicação com a base de dados")]
     public abstract class BaseEntity
     {
         [Key]

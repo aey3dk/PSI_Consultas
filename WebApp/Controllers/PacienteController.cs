@@ -1,7 +1,5 @@
 ﻿using DAL.Model;
 using DAL.Repository;
-//using Domain.Entity;
-using Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -56,7 +54,7 @@ namespace WebApp.Controllers
                     new PacienteRepository().Inserir(p);
                     new PacienteRepository().Salvar();
 
-                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Id, tipoDeOperacao == TipoOperacaoEnum.Edicao ? "atualizado" : "cadastrado");
+                    ViewBag.Mensagem = String.Format("Paciente {0} {1} com sucesso.", p.Id, tipoDeOperacao == TipoOperacaoEnum.Alteracao ? "atualizado" : "cadastrado");
                 }
                 catch (Exception ex)
                 {
@@ -137,7 +135,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                Session.Add("TipoDeOperacao", TipoOperacaoEnum.Edicao);
+                Session.Add("TipoDeOperacao", TipoOperacaoEnum.Alteracao);
 
                 return View("Cadastrar", new PacienteModel()
                 {
